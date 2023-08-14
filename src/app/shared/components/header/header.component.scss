@@ -1,0 +1,74 @@
+$primary-color: #003b6f;
+$secondary-color: #0468c0;
+$box-shadow-color: rgb(126, 144, 150);
+$text-color: aliceblue;
+$hover-bg-color: rgba(15, 79, 116, 0.744);
+$hover-text-color: rgb(170, 184, 197);
+
+.header {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, $primary-color, $secondary-color);
+  box-shadow: 0px 0px 14px 10px $box-shadow-color;
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    
+    .logo-image {
+      height: 2.5rem;
+      width: auto;
+      max-height: 100%;
+    }
+  }
+
+  .center-title {
+    display: inline-block;
+    text-align: center;
+    flex: 1;
+    color: $text-color;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .login-button {
+    margin-left: auto;
+    padding: 5px;
+    border-radius: 50%;
+    
+    &:hover {
+      background-color: $hover-bg-color;
+      color: $hover-text-color;
+      cursor: pointer;
+    }
+  }
+
+  #username {
+    color:$text-color;
+    font-weight: bolder;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mat-icon {
+    color: $text-color;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .toolbar {
+    .center-title {
+      font-size: 16px; 
+    }
+    .login-button {
+      padding: 5px; 
+    }
+    #username {
+      font-size: 14px;
+    }
+  }
+}

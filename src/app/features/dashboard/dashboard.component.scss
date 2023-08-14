@@ -1,0 +1,73 @@
+$button-color: #366791;
+$dashboard-title-color: navy;
+$text-color: rgb(42, 42, 75);
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 1px;
+    color: $dashboard-title-color;
+    font-weight: bolder;
+  }
+
+  p {
+    font-size: 11px;
+    color: $text-color;
+  }
+
+  button {
+    background-color: $button-color;
+    border-radius: 30px;
+    font-size: x-small;
+}
+}
+
+div {
+  margin: 0 5%;
+  table {
+    width: 100%;
+    table-layout: fixed;
+
+    th, td {
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+    .createdOn, .updatedOn, .remarks-content {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+
+  @media screen and (max-width: 900px) {
+    table {
+      font-size: 1px;
+
+      th, td {
+        padding: 1px;
+      }
+    }
+  }
+}
+
+.session-button {
+  font-size: x-small;
+  &.active-session {
+    background-color: $button-color;
+  }
+  &.active-archive {
+    background-color: $button-color;
+  }
+}
