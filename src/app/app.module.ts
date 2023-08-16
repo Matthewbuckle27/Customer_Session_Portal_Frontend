@@ -24,6 +24,9 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { NewSessionComponent } from './features/new-session/new-session.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MomentFormatPipe } from './services/moment-format.pipe';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 
@@ -34,7 +37,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HeaderComponent,
     LoginComponent,
     DashboardComponent,
-    NewSessionComponent
+    NewSessionComponent,
+    MomentFormatPipe
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatPaginatorModule,
     MatDialogModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

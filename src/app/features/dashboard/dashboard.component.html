@@ -1,85 +1,164 @@
 <div class="welcome">
   <h2>Welcome to the Session Portal!</h2>
-  <p>The Relationship Between A Client Must be 'we'.</p>
-  <button mat-raised-button color="primary"  (click)="openNewSessionModal()">
+  <button mat-raised-button (click)="openNewSessionModal()">
     <mat-icon>add_circle_outline</mat-icon>New Session
   </button>
 </div>
 
-<div class="mat-elevation-z8">
-  <button mat-button (click)="getActiveSessions()" class="session-button" [class.active-session]="activeSessionsSelected" (click)="toggleSessions(true)">Active Sessions</button>
-  <button mat-button (click)="getArchiveSessions()" class="session-button" [class.active-archive]="!activeSessionsSelected" (click)="toggleSessions(false)">Archived Sessions</button>
-  <table mat-table [dataSource]="dataSource">
-
-    <!-- Session Name -->
-    <ng-container matColumnDef="sessionName">
-      <th mat-header-cell *matHeaderCellDef> Session Name </th>
-      <td mat-cell *matCellDef="let session"> {{session.sessionName}} </td>
-    </ng-container>
-
-    <!-- Session ID -->
-    <ng-container matColumnDef="sessionID">
-      <th mat-header-cell *matHeaderCellDef>Session ID </th>
-      <td mat-cell *matCellDef="let session"> {{session.sessionID}} </td>
-    </ng-container>
-
-     <!-- Customer Name -->
-     <ng-container matColumnDef="customerName">
-      <th mat-header-cell *matHeaderCellDef> Customer Name </th>
-      <td mat-cell *matCellDef="let session" class="customerName"> {{session.customerName}} </td>
-    </ng-container>
-
-    <!-- Created By -->
-    <ng-container matColumnDef="createdBy">
-      <th mat-header-cell *matHeaderCellDef> Created By </th>
-      <td mat-cell *matCellDef="let session"> {{session.createdBy}} </td>
-    </ng-container>
-    
-    <!-- Updated By -->
-    <ng-container matColumnDef="updatedBy">
-      <th mat-header-cell *matHeaderCellDef> Updated By </th>
-      <td mat-cell *matCellDef="let session"> {{session.updatedBy}} </td>
-    </ng-container>
-
-    <!-- Created On -->
-    <ng-container matColumnDef="createdOn">
-      <th mat-header-cell *matHeaderCellDef> Created On </th>
-      <td mat-cell *matCellDef="let session" class="createdOn"> {{session.createdOn}} </td>
-    </ng-container>
-
-     <!-- Updated On -->
-     <ng-container matColumnDef="updatedOn">
-      <th mat-header-cell *matHeaderCellDef > Updated On </th>
-      <td mat-cell *matCellDef="let session" class="updatedOn"> {{session.updatedOn}} </td>
-    </ng-container>
-
-     <!-- Status Column -->
-     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let session"> {{session.status}} </td>
-    </ng-container>
-
-      <!-- Remarks Column -->
-      <ng-container matColumnDef="remarks" class="text-center">
-        <th mat-header-cell *matHeaderCellDef> Remarks </th>
-        <td mat-cell *matCellDef="let session" class="remarks-content"> {{session.remarks}} </td>
+<div class="mat-elevation-z2" id="dashboard">
+<mat-tab-group animationDuration="0ms" mat-stretch-tabs="false" mat-align-tabs="start" (selectedTabChange)="onTabChange($event)" [color]="activeTabColor">
+  <mat-tab label="Active Sessions">
+    <table mat-table [dataSource]="dataSource"  >
+      <!-- Session Name -->
+      <ng-container matColumnDef="sessionName">
+        <th mat-header-cell *matHeaderCellDef> Session Name </th>
+        <td mat-cell *matCellDef="let session"> {{session.sessionName}} </td>
       </ng-container>
 
-    <!-- Mat buttons to edit delete archive for session -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let session" >
-        <mat-icon color="accent" (click)="vieweSession(session)">view_agenda</mat-icon>
-        <mat-icon (click)="editSession(session)" color="primary" *ngIf="!archived">edit</mat-icon>
-          <mat-icon (click)="deleteSession(session)" color="warn" *ngIf="!archived">delete</mat-icon>
-          <mat-icon (click)="archiveSession(session)" color="accent" *ngIf="!archived">archive</mat-icon>
-      </td>
-    </ng-container>
+        <!-- Session ID -->
+        <ng-container matColumnDef="sessionID">
+          <th mat-header-cell *matHeaderCellDef>Session ID </th>
+          <td mat-cell *matCellDef="let session"> {{ transformSessionID(session.sessionID) }} </td>
+        </ng-container>
+    
+         <!-- Customer Name -->
+         <ng-container matColumnDef="customerName">
+          <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+          <td mat-cell *matCellDef="let session" class="customerName"> {{session.customerName}} </td>
+        </ng-container>
+    
+        <!-- Created By -->
+        <ng-container matColumnDef="createdBy">
+          <th mat-header-cell *matHeaderCellDef> Created By </th>
+          <td mat-cell *matCellDef="let session"> {{session.createdBy}} </td>
+        </ng-container>
+        
+        <!-- Updated By -->
+        <ng-container matColumnDef="updatedBy">
+          <th mat-header-cell *matHeaderCellDef> Updated By </th>
+          <td mat-cell *matCellDef="let session"> {{session.updatedBy}} </td>
+        </ng-container>
+    
+        <!-- Created On -->
+        <ng-container matColumnDef="createdOn">
+          <th mat-header-cell *matHeaderCellDef> Created On </th>
+          <td mat-cell *matCellDef="let session" class="createdOn"> {{session.createdOn  | moment: 'DD-MMM-YYYY'}} </td>
+        </ng-container>
+    
+         <!-- Updated On -->
+         <ng-container matColumnDef="updatedOn">
+          <th mat-header-cell *matHeaderCellDef > Updated On </th>
+          <td mat-cell *matCellDef="let session" class="updatedOn"> {{session.updatedOn|moment: 'DD-MMM-YYYY'}} </td>
+        </ng-container>
+    
+         <!-- Status Column -->
+         <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="custom-width"> Status </th>
+          <td mat-cell *matCellDef="let session"> Active </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef> View </th>
+          <td mat-cell *matCellDef="let session"> 
+            <mat-icon id="options">remove_red_eye</mat-icon>
+          </td>
+        </ng-container>
 
-  <mat-paginator [pageSizeOptions]="[4, 8, 16]" showFirstLastButtons aria-label="Select page of sessions">
-  </mat-paginator>
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef> Edit </th>
+          <td mat-cell *matCellDef="let session"> 
+            <mat-icon id="options">edit</mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Delete </th>
+          <td mat-cell *matCellDef="let session"> 
+            <mat-icon id="options">delete</mat-icon>   
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="archive">
+          <th mat-header-cell *matHeaderCellDef class="custom-width" > Archive </th>
+          <td mat-cell *matCellDef="let session">
+            <mat-icon id="options" *ngIf="isArchiveable(session.updatedOn)">archive</mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="activeDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: activeDisplayedColumns;"></tr>
+    </table>
+  </mat-tab>
+
+  <mat-tab label="Archived Sessions">
+
+    <table mat-table [dataSource]="dataSource">
+      <!-- Session Name -->
+      <ng-container matColumnDef="sessionName">
+        <th mat-header-cell *matHeaderCellDef> Session Name </th>
+        <td mat-cell *matCellDef="let session"> {{session.sessionName}} </td>
+      </ng-container>
+
+        <!-- Session ID -->
+        <ng-container matColumnDef="sessionID">
+          <th mat-header-cell *matHeaderCellDef>Session ID </th>
+          <td mat-cell *matCellDef="let session">{{ transformSessionID(session.sessionID) }} </td>
+        </ng-container>
+    
+         <!-- Customer Name -->
+         <ng-container matColumnDef="customerName">
+          <th mat-header-cell *matHeaderCellDef> Customer Name </th>
+          <td mat-cell *matCellDef="let session" class="customerName"> {{session.customerName}} </td>
+        </ng-container>
+    
+        <!-- Created By -->
+        <ng-container matColumnDef="createdBy">
+          <th mat-header-cell *matHeaderCellDef> Created By </th>
+          <td mat-cell *matCellDef="let session"> {{session.createdBy}} </td>
+        </ng-container>
+        
+        <!-- Updated By -->
+        <ng-container matColumnDef="updatedBy">
+          <th mat-header-cell *matHeaderCellDef> Updated By </th>
+          <td mat-cell *matCellDef="let session"> {{session.updatedBy}} </td>
+        </ng-container>
+    
+        <!-- Created On -->
+        <ng-container matColumnDef="createdOn">
+          <th mat-header-cell *matHeaderCellDef> Created On </th>
+          <td mat-cell *matCellDef="let session" class="createdOn"> {{session.createdOn  | moment: 'DD-MM-YYYY'}} </td>
+        </ng-container>
+    
+         <!-- Updated On -->
+         <ng-container matColumnDef="updatedOn">
+          <th mat-header-cell *matHeaderCellDef > Updated On </th>
+          <td mat-cell *matCellDef="let session" class="updatedOn"> {{session.updatedOn|moment: 'DD-MM-YYYY'}} </td>
+        </ng-container>
+    
+         <!-- Status Column -->
+         <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="custom-width"> Status </th>
+          <td mat-cell *matCellDef="let session"> Archived </td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+          <th mat-header-cell *matHeaderCellDef> View </th>
+          <td mat-cell *matCellDef="let session"> 
+            <mat-icon id="options">remove_red_eye</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="archiveDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: archiveDisplayedColumns;"></tr>
+    </table>
+  </mat-tab>
+
+</mat-tab-group>
+<mat-divider></mat-divider>
+
+<div class="paginator">
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of sessions">
+</mat-paginator>
 </div>
+
+</div>
+

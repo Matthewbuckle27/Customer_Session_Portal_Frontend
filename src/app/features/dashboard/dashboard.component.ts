@@ -1,7 +1,8 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { NewSessionComponent } from '../new-session/new-session.component';
 
@@ -11,23 +12,52 @@ import { NewSessionComponent } from '../new-session/new-session.component';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit,  AfterViewInit{
-
-
-  activeSessionsSelected = true;
-
-  toggleSessions(active: boolean) {
-    this.activeSessionsSelected = active;
-  }
-
-  sessions: Session[] = [];
-  archived = false;
-  activeSessionsActive = false;
-  archivedSessionsActive = false;
+export class DashboardComponent implements OnInit, AfterViewInit{
+  activeTabColor='red';
   
+  @ViewChild(MatPaginator) 
+  paginator!: MatPaginator;
+
+ 
+  
+  
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    }
+
   ngOnInit(): void {
     this.getActiveSessions();
   }
+
+  constructor(private dashboardService: DashboardService, private dialog:MatDialog){}
+  activeDisplayedColumns: string[] = [
+    'sessionName',
+    'sessionID',
+    'customerName',
+    'createdBy',
+    'updatedBy',
+    'createdOn',
+    'updatedOn',
+    'status',
+    'view',
+    'edit',
+    'delete',
+    'archive'
+  ];
+
+  archiveDisplayedColumns: string[] = [
+    'sessionName',
+    'sessionID',
+    'customerName',
+    'createdBy',
+    'updatedBy',
+    'createdOn',
+    'updatedOn',
+    'status',
+    'view'
+  ];
+
+  dataSource = new MatTableDataSource<Session>();
 
   openNewSessionModal() {
     const dialogRef = this.dialog.open(NewSessionComponent, {
@@ -40,50 +70,19 @@ export class DashboardComponent implements OnInit,  AfterViewInit{
     });
   }
 
-  constructor(private dashboardService: DashboardService, private dialog:MatDialog){}
-  displayedColumns: string[] = [
-    'sessionName',
-    'sessionID',
-    'customerName',
-    'createdBy',
-    'updatedBy',
-    'createdOn',
-    'updatedOn',
-    'status',
-    'remarks',
-    'actions'
-  ];
 
-  dataSource = new MatTableDataSource<Session>();
+  onTabChange(event: MatTabChangeEvent) {
+    if (event.index === 1) {
+      this.getArchiveSessions();
+    }else {
+      this.getActiveSessions(); 
+    }
+    }
 
-  @ViewChild(MatPaginator) 
-  paginator!: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
   getActiveSessions(){
-    this.archived=false;
-    this.activeSessionsActive = true;
-    this.archivedSessionsActive = false;
     this.dashboardService.getActiveSessions().subscribe(
       (z) => {
-        // this.sessions = z;
         this.dataSource.data = z;
-      },
-      (error) => {
-        console.error('Error fetching sessions:', error);
-      }
-    );
-  }
-  getArchiveSessions(){
-    this.archived=true;
-    this.activeSessionsActive = false;
-    this.archivedSessionsActive = true;
-    this.dashboardService.getArchivedSessions().subscribe(
-      (z) => {
-        // this.sessions = z;
-        this.dataSource.data = z
         console.log(this.dataSource.data);
       },
       (error) => {
@@ -92,22 +91,42 @@ export class DashboardComponent implements OnInit,  AfterViewInit{
     );
   }
 
-  editSession(session: Session) {
-    console.log('Edit session:', session);
+  getArchiveSessions(){
+    this.dashboardService.getArchivedSessions().subscribe(
+      (z) => {
+        this.dataSource.data = z
+      },
+      (error) => {
+        console.error('Error fetching sessions:', error);
+      }
+    );
   }
 
-  deleteSession(session: Session) {
-    console.log('Delete session:', session);
+  transformSessionID(sessionID: string): string {
+    if (sessionID.length >= 8) {
+      const prefix = sessionID.slice(0, 6);
+      const maskedSuffix = 'XXXX';
+      return prefix + maskedSuffix;
+    } else {
+      return sessionID;
+    }
   }
 
-  archiveSession(session: Session) {
-    console.log('Archive session:', session);
+  isArchiveable(updatedOn: string): boolean {
+    const tenDaysInMilliseconds = 10 * 24 * 60 * 60 * 1000; // 10 days in milliseconds
+    const updatedDate = new Date(updatedOn);
+    const currentDate = new Date();
+    
+    const timeDifference = currentDate.getTime() - updatedDate.getTime();
+    return timeDifference >= tenDaysInMilliseconds;
   }
+  
+  
+  
+  
+
 
   
-  vieweSession(session: Session) {
-    console.log('View session:', session);
-  }
 
 }
 
