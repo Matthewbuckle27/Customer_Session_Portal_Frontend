@@ -24,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MomentFormatPipe } from './services/moment-format.pipe';
 import { MatDividerModule } from '@angular/material/divider';
+import { LoginComponent } from './features/login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatDividerModule } from '@angular/material/divider';
     HeaderComponent,
     DashboardComponent,
     MomentFormatPipe,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginServiceService } from '../../../services/login-service.service';
-import { AppRoutes } from '../../constants/string-constant';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-header',
@@ -9,14 +9,11 @@ import { AppRoutes } from '../../constants/string-constant';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(
-    public loginService: LoginServiceService,
-    private router: Router
-  ) {}
+  constructor(public service:AuthService, private route:Router){}
 
-  logOut() {
-    this.loginService.logout();
+  logOut(){
+    this.service.logout();
     localStorage.clear();
-    this.router.navigateByUrl(AppRoutes.LOGIN);
+    this.route.navigateByUrl("/login");
   }
 }
