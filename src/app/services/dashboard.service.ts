@@ -4,11 +4,10 @@ import { Observable, map } from 'rxjs';
 import { Session } from '../features/dashboard/dashboard.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DashboardService {
-  private sessionsUrl = '../../assets/sessions.json'; 
-
+  private sessionsUrl = '../../assets/sessions.json';
   constructor(private http: HttpClient) {}
 
   getSessions(): Observable<Session[]> {
@@ -17,13 +16,13 @@ export class DashboardService {
 
   getActiveSessions(): Observable<Session[]> {
     return this.getSessions().pipe(
-      map(sessions => sessions.filter(session => session.status === 'A'))
+      map((sessions) => sessions.filter((session) => session.status === 'A'))
     );
   }
 
   getArchivedSessions(): Observable<Session[]> {
     return this.getSessions().pipe(
-      map(sessions => sessions.filter(session => session.status === 'X'))
+      map((sessions) => sessions.filter((session) => session.status === 'X'))
     );
   }
 }
