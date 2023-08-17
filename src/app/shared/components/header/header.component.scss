@@ -7,7 +7,7 @@
   .logo {
     display: flex;
     align-items: center;
-    
+
     .logo-image {
       height: 2.5rem;
       width: auto;
@@ -31,7 +31,7 @@
     margin-left: auto;
     padding: 5px;
     border-radius: 50%;
-    
+
     &:hover {
       background-color: var(--hover-bg-color);
       color: var(--hover-text-color);
@@ -40,12 +40,11 @@
   }
 
   #username {
-    color:var(--text-color);
+    color: var(--text-color);
     font-weight: bolder;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
   }
 
   .mat-icon {
@@ -56,10 +55,10 @@
 @media screen and (max-width: 767px) {
   .toolbar {
     .center-title {
-      font-size: 16px; 
+      font-size: 16px;
     }
     .login-button {
-      padding: 5px; 
+      padding: 5px;
     }
     #username {
       font-size: 14px;

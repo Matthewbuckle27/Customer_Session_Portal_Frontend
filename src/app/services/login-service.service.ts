@@ -3,35 +3,30 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginServiceService {
-  
-  logged =false;
+  isLoggedIn = false;
   private loginDataurl;
   user: string | undefined;
 
-  
-  
-  constructor(private httpConnection:HttpClient){
-    this.loginDataurl="../../assets/logindetails.json";
+  constructor(private httpConnection: HttpClient) {
+    this.loginDataurl = '../../assets/logindetails.json';
   }
 
-
-  login():Observable<UserData[]>{
+  login(): Observable<UserData[]> {
     return this.httpConnection.get<UserData[]>(this.loginDataurl);
   }
 
-  loggedintrue(username1:string){
-    this.logged=true;
-    this.user=username1;
+  loggedintrue(username1: string) {
+    this.isLoggedIn = true;
+    this.user = username1;
   }
 
-  logout(){
-     this.logged=false;
-     localStorage.clear(); 
+  logout() {
+    this.isLoggedIn = false;
+    localStorage.clear();
   }
-
 }
 
 interface UserData {
