@@ -1,0 +1,17 @@
+<mat-toolbar class="header">
+    <div class="logo">
+      <img src="../../../../assets/images/CITI.jpg" alt="Citi-Logo" class="logo-image" routerLink="/home">
+    </div>
+    <span id="title" class="center-title" routerLink="/home">Customer Session Portal</span> 
+    <span id="username" *ngIf="service.logged">{{ service.user }}</span>   
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
+      <mat-icon *ngIf="!service.logged">person</mat-icon>
+      <mat-icon *ngIf="service.logged">exit_to_app</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngIf="service.logged" (click)="logOut()">Logout</button>
+      <button mat-menu-item *ngIf="!service.logged" routerLink="/login">Login</button>
+    </mat-menu>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+  

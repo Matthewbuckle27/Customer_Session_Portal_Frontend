@@ -1,0 +1,72 @@
+// Dashboard welcome css
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 17vh;
+
+  h2 {
+    font-size: var(--dashboard-title-font);
+    margin-bottom: 5px;
+    color: var(--dashboard-title-color);
+    font-weight: bold;
+  }
+  button {
+    background-color: var(--button-color);
+    border-radius: 30px;
+    color: var(--button-text);
+    font-size: x-small;
+}
+}
+
+// dashboard table css
+
+#dashboard{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  // height: calc(55vh - -5vh); 
+  height: 60%;
+  margin: 0 5%;
+  box-shadow: 0 0 5px 5px rgb(212, 212, 212);
+  border-radius: 12px;
+  overflow: auto;
+  table{
+    // overflow: auto;
+  th{
+    font-size: var(--table-header);
+    text-align: center;
+    background-color: var(--table-header-color);
+
+  }
+  td{
+    text-align: center;
+    font-size: var(--table-data);
+  }
+  tr{
+    height: 7vh;
+  }
+}
+}
+.custom-width{
+  width: 4vw;
+}
+
+
+//Options CSS
+#options{
+  font-size: large;
+  padding-top: 3px;
+  color: var(--options-icon);
+  cursor: pointer;
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+#archive{
+  width: 20px;
+}
