@@ -1,0 +1,73 @@
+/* session-view.component.scss */
+@import url(/src/assets/styles/variables.scss);
+
+$font: 'Times New Roman', Times, serif;
+
+.dialog-container-fluid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: $font!important;
+  padding: 20px;
+  background-color: var(--view-dialog-container-bgcolor);
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 5px var(--view-dialog-container-boxshadow);
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  margin: 10px;
+}
+
+.cdk-overlay-container, .cdk-global-overlay-wrapper {
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 0%!important;
+  width: 100%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--view-black-color);
+}
+
+.dialog-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color:var(--view-blue-color);
+  text-align: center;
+  padding-top: 30px;
+}
+
+.info-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: var(--view-blue-color);
+}
+
+.info-label {
+  flex: 0 0 150px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.info-value {
+  flex: 1;
+  color:var(--view-black-color);
+}
+
+.dialog-actions {
+  margin-top: 20px;
+}
+
+.dialog-content {
+  width: 100%;
+  height: vh-100;
+}
+
+

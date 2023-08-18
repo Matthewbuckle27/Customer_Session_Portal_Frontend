@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DashboardService } from '../../services/dashboard.service';
+import { HttpClient } from '@angular/common/http';
+import { SessionViewComponent } from '../session-view/session-view.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,9 +27,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private dashboardService: DashboardService,
-    private dialog: MatDialog
-  ) {}
+    private dashboardService: DashboardService,private dialog: MatDialog,private http: HttpClient) {}
 
   activeDisplayedColumns: string[] = [
     'sessionName',
@@ -93,11 +93,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     const timeDifference = currentDate.getTime() - updatedDate.getTime();
     return timeDifference >= tenDaysInMilliseconds;
   }
+
+  viewSession(session:any):void
+  {
+    const dialogref=this.dialog.open(SessionViewComponent,{
+      width:'25%',
+      data:session
+    });
+}
 }
 
 export interface Session {
   sessionName: string;
-  sessionID: number;
+  sessionId: string; // Change this to string
   remarks: string;
   createdBy: string;
   updatedBy: string;
