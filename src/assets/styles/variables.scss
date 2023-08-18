@@ -12,18 +12,19 @@
     --hover-text-color: rgb(170, 184, 197);
     --card-title-color: navy;
     --validation-color: red;
-
-        /*Login Page Colours*/
-        --login-primary-color: #142737;
-        --login-secondary-color: #154f82;
-        --login-card-bg-color:rgb(246, 251, 252);
-        --login-button-bg-color:#026595;
-        --login-disabled-bg-color:rgb(183,182,182);
-        --login-box-color:rgb(211,211,211);
-
-        /*View Page Colours*/
-        --view-dialog-container-bgcolor:#fff;
-        --view-dialog-container-boxshadow:skyblue;
-        --view-blue-color:#0099cc;
-        --view-black-color:black;
+    /*Header BGcolor*/
+    --header-bgcolor:linear-gradient(to right, #142737, #154f82);
+    /*Login Page Colours*/
+    --login-primary-color: #142737;
+    --login-secondary-color: #154f82;
+    --login-card-bg-color:rgb(246, 251, 252);
+    --login-button-bg-color:#026595;
+    --login-disabled-bg-color:rgb(183,182,182);
+    --login-box-color:rgb(211,211,211);
+    /*Mat Pop-up colours*/
+    --mat-popup-bgcolor:#fff;
+    --mat-key-color:#154f82;
+    --mat-value-color:black;
+    --mat-header-color:white;
+    --mat-border-color:black;
 }

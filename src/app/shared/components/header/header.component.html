@@ -2,11 +2,11 @@
   <div class="logo">
     <img src="../../../../assets/images/CITI.jpg" alt="Citi-Logo" class="logo-image" routerLink="/home">
   </div>
-  <span id="title" class="center-title" routerLink="/home">Customer Session Portal</span>
+  <span id="title" class="center-title">Customer Session Portal</span>
   <span id="username" *ngIf="service.isLoggedIn">{{ service.username }}</span>
   <button mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
-    <mat-icon *ngIf="!service.isLoggedIn">person</mat-icon>
-    <mat-icon *ngIf="service.isLoggedIn">exit_to_app</mat-icon>
+    <mat-icon *ngIf="!service.isLoggedIn" routerLink="/login">person</mat-icon>
+    <mat-icon *ngIf="service.isLoggedIn" routerLink="/login">exit_to_app</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item *ngIf="service.isLoggedIn" (click)="logOut()">Logout</button>

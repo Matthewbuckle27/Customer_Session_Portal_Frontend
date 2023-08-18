@@ -94,18 +94,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return timeDifference >= tenDaysInMilliseconds;
   }
 
+
   viewSession(session:any):void
   {
     const dialogref=this.dialog.open(SessionViewComponent,{
-      width:'25%',
+      width:'32%',
+      height:'auto',
       data:session
     });
-}
+  }
 }
 
 export interface Session {
   sessionName: string;
-  sessionId: string; // Change this to string
+  sessionID: string; // Change this to string
   remarks: string;
   createdBy: string;
   updatedBy: string;

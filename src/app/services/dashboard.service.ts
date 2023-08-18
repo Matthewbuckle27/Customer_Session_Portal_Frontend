@@ -25,4 +25,5 @@ export class DashboardService {
       map((sessions) => sessions.filter((session) => session.status === 'X'))
     );
   }
+
 }
