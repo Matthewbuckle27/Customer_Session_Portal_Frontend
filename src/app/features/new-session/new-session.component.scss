@@ -1,0 +1,81 @@
+@import url(/src/assets/styles/variables.scss);
+$primary-color: navy;
+$accent-color: orange;
+
+.dialog-title
+{
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: white;
+  padding-top: 0.9375rem;
+}
+mat-dialog-content {
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 24px;
+  padding-top: 20px;
+  text-align: center;
+  margin-bottom: 5px;
+  color: $primary-color;
+}
+
+.form-row {
+  color: var(--dialog-body-key-color);
+  display: flex;
+  flex-direction: column;
+  margin-bottom:-4px;
+}
+
+.remarks {
+  min-height: 5px;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -30px;
+
+}
+
+.mat-form-field-outline {
+  border-radius: 15px;
+  }
+
+button {
+  min-width: 80px;
+  border-radius: 10px; 
+  font-size: small; 
+  border-radius: 30px;
+  margin-top: 10px;
+}
+.submit {
+  margin-right: 20px;
+  width: 20px;
+}
+.close-button {
+  position: absolute;
+  top: -15px;
+  right:0px;
+  min-width: 10px;
+  min-height: 10px;
+  color: var(--mat-header-color);
+}
+
+.header{
+  background:var(--header-bgcolor);
+  align-items: start;
+}
+
+.custom-button-color {
+  background-color:var(--button-color);
+  border-radius: 30px;
+  color: var(--button-text);
+  font-size: small;
+}

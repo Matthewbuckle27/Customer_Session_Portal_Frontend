@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DashboardService } from '../../services/dashboard.service';
+import { NewSessionComponent } from '../new-session/new-session.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +29,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private dashboardService: DashboardService,
     private dialog: MatDialog
   ) {}
+  openSessionModal() {
+    const dialogRef = this.dialog.open(NewSessionComponent, {
+      width: '27%',
+      height:'80%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
+  }
 
   activeDisplayedColumns: string[] = [
     'sessionName',
