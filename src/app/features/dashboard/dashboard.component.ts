@@ -29,7 +29,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private dashboardService: DashboardService,
     private dialog: MatDialog
   ) {}
-  openSessionModal() {
+
+  createSessionDialog() {
     const dialogRef = this.dialog.open(NewSessionComponent, {
       width: '27%',
       height:'80%'

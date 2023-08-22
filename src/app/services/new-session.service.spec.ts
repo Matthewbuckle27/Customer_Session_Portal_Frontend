@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { NewSessionService } from './new-session.service';
 
 describe('NewSessionService', () => {

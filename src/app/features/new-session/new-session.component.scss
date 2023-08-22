@@ -1,16 +1,15 @@
 @import url(/src/assets/styles/variables.scss);
-$primary-color: navy;
-$accent-color: orange;
+@import url(/src/assets/fonts/fonts.scss);
 
-.dialog-title
-{
-  font-size: 22px;
+.dialog-title {
+  font-size: var(--create--title-font);
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
-  color: white;
+  color: var(--mat-header-color);
   padding-top: 0.9375rem;
 }
+
 mat-dialog-content {
   max-width: 400px;
   width: 100%;
@@ -18,18 +17,18 @@ mat-dialog-content {
 }
 
 .title {
-  font-size: 24px;
+  font-size: var(--create--title-font);
   padding-top: 20px;
   text-align: center;
   margin-bottom: 5px;
-  color: $primary-color;
+  color: var(--mat-primay-color);
 }
 
 .form-row {
   color: var(--dialog-body-key-color);
   display: flex;
   flex-direction: column;
-  margin-bottom:-4px;
+  margin-bottom: -4px;
 }
 
 .remarks {
@@ -46,35 +45,37 @@ mat-dialog-actions {
 
 .mat-form-field-outline {
   border-radius: 15px;
-  }
+}
 
 button {
-  min-width: 80px;
-  border-radius: 10px; 
-  font-size: small; 
+  min-width: 8vw;
+  border-radius: 10px;
+  font-size: small;
   border-radius: 30px;
   margin-top: 10px;
 }
+
 .submit {
   margin-right: 20px;
   width: 20px;
 }
+
 .close-button {
   position: absolute;
   top: -15px;
-  right:0px;
+  right: 0px;
   min-width: 10px;
   min-height: 10px;
   color: var(--mat-header-color);
 }
 
-.header{
-  background:var(--header-bgcolor);
+.header {
+  background: var(--header-bgcolor);
   align-items: start;
 }
 
 .custom-button-color {
-  background-color:var(--button-color);
+  background-color: var(--button-color);
   border-radius: 30px;
   color: var(--button-text);
   font-size: small;
