@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DashboardService } from '../../services/dashboard.service';
 import { NewSessionComponent } from '../new-session/new-session.component';
+import { EditSessionComponent } from '../edit-session/edit-session.component';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,7 +29,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private sessionService:SessionService
   ) {}
 
   createSessionDialog() {
@@ -38,6 +41,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
+    });
+  }
+
+  editSession(session:Session){
+    const dialogRef=this.dialog.open(EditSessionComponent,{
+      width:'35%',
+      data:session
+    })
+    dialogRef.afterClosed().subscribe((updatedSession: Session) => {
+      if (updatedSession) {
+        console.log(updatedSession);
+        this.getActiveSessions();
+      }
     });
   }
 
