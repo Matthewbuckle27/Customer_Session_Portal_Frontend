@@ -1,0 +1,43 @@
+<mat-toolbar class="header">
+  <button mat-icon-button class="close-button" (click)="onClose()">
+    <mat-icon>close</mat-icon></button>
+  <div class="dialog-title">
+    <h3>Create Session</h3>
+  </div>
+</mat-toolbar>
+
+<form [formGroup]="createSessionForm" (ngSubmit)="createSession()">
+  <mat-dialog-content>
+    <div class="form-row">
+      <mat-label>Customer Name</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="customerName" name="customerName">
+        <mat-error *ngIf="customerName?.touched && customerName?.invalid">Customer Name is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-label>Session Name</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="sessionName" name="sessionName">
+        <mat-error *ngIf="sessionName?.touched && sessionName?.invalid">Session Name is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-label>Remarks</mat-label>
+      <mat-form-field appearance="outline">
+        <textarea class="remarks" matInput formControlName="remarks" name="remarks"></textarea>
+        <mat-error *ngIf="remarks?.touched && remarks?.invalid">Remarks are required</mat-error>
+      </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button [class.custom-button-color]="!createSessionForm.invalid && !isLoading"
+      [disabled]="createSessionForm.invalid || isLoading" class="submit">Create</button>
+    <ng-container *ngIf="isLoading; else createButtonContent">
+      <mat-spinner diameter="20"></mat-spinner>
+    </ng-container>
+    <ng-template #createButtonContent></ng-template>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </mat-dialog-actions>
+</form>

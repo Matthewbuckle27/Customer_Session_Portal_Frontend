@@ -23,9 +23,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MomentFormatPipe } from './services/moment-format.pipe';
 import { MatDividerModule } from '@angular/material/divider';
+<<<<<<< HEAD
 import { HttpClient } from '@angular/common/http';
 import { LoginComponent } from './features/login/login.component';
 import { SessionViewComponent } from './features/session-view/session-view.component';
+=======
+import { NewSessionComponent } from './features/new-session/new-session.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+
+>>>>>>> main
 
 @NgModule({
   declarations: [
@@ -33,8 +40,12 @@ import { SessionViewComponent } from './features/session-view/session-view.compo
     HeaderComponent,
     DashboardComponent,
     MomentFormatPipe,
+<<<<<<< HEAD
     LoginComponent,
     SessionViewComponent,
+=======
+    NewSessionComponent,
+>>>>>>> main
   ],
   imports: [
     BrowserModule,
@@ -57,6 +68,8 @@ import { SessionViewComponent } from './features/session-view/session-view.compo
     MatSnackBarModule,
     MatTabsModule,
     MatDividerModule,
+    MatProgressSpinnerModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
