@@ -7,7 +7,6 @@ import { DashboardService } from '../../services/dashboard.service';
 import { HttpClient } from '@angular/common/http';
 import { SessionViewComponent } from '../session-view/session-view.component';
 import { NewSessionComponent } from '../new-session/new-session.component';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,29 +17,23 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Session>();
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-
   ngOnInit(): void {
     this.getActiveSessions();
   }
-
   constructor(
     private dashboardService: DashboardService,private dialog: MatDialog,private http: HttpClient) {}
-
   createSessionDialog() {
     const dialogRef = this.dialog.open(NewSessionComponent, {
       width: '27%',
       height:'auto'
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
     });
   }
-
   activeDisplayedColumns: string[] = [
     'sessionName',
     'sessionID',
@@ -55,7 +48,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     'delete',
     'archive',
   ];
-
   archiveDisplayedColumns: string[] = [
     'sessionName',
     'sessionID',
@@ -67,7 +59,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     'status',
     'view',
   ];
-
   onTabChange(event: MatTabChangeEvent) {
     if (event.index === 1) {
       this.getArchiveSessions();
@@ -75,19 +66,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.getActiveSessions();
     }
   }
-
   getActiveSessions() {
     this.dashboardService.getActiveSessions().subscribe((z) => {
       this.dataSource.data = z;
     });
   }
-
   getArchiveSessions() {
     this.dashboardService.getArchivedSessions().subscribe((z) => {
       this.dataSource.data = z;
     });
   }
-
   transformSessionID(sessionID: string): string {
     if (sessionID.length >= 8) {
       const prefix = sessionID.slice(0, 6);
@@ -97,7 +85,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       return sessionID;
     }
   }
-
   isArchiveable(updatedOn: string): boolean {
     const tenDaysInMilliseconds = 10 * 24 * 60 * 60 * 1000;
     const updatedDate = new Date(updatedOn);
@@ -105,18 +92,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     const timeDifference = currentDate.getTime() - updatedDate.getTime();
     return timeDifference >= tenDaysInMilliseconds;
   }
-
-
   viewSession(session:any):void
   {
     const dialogref=this.dialog.open(SessionViewComponent,{
       width:'32%',
-      height:'auto',
+      height:'70%',
       data:session
     });
   }
 }
-
 export interface Session {
   sessionName: string;
   sessionID: string; // Change this to string
