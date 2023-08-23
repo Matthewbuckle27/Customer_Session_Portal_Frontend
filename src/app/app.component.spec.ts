@@ -1,12 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar'; // Import MatToolbarModule
+import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent]
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+      ],
+      declarations: [AppComponent, HeaderComponent],
+    })
+  );
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -24,6 +37,10 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Customer-Session-Portal app is running!');
+    const titleElement = compiled.querySelector('.center-title');
+    const actualTitleText = titleElement?.textContent?.trim();
+    const expectedTitleText = 'Customer Session Portal';
+    console.log('Actual Title Text:', actualTitleText);
+    expect(actualTitleText).toContain(expectedTitleText);
   });
 });

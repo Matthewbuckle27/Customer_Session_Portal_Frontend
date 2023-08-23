@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IUserData } from '../features/models/session.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,8 @@ export class LoginServiceService {
     this.loginDataurl = '../../assets/logindetails.json';
   }
 
-  login(): Observable<UserData[]> {
-    return this.httpConnection.get<UserData[]>(this.loginDataurl);
+  login(): Observable<IUserData[]> {
+    return this.httpConnection.get<IUserData[]>(this.loginDataurl);
   }
 
   loggedintrue(username1: string) {
@@ -27,9 +28,4 @@ export class LoginServiceService {
     this.isLoggedIn = false;
     localStorage.clear();
   }
-}
-
-interface UserData {
-  username: string;
-  password: string;
 }

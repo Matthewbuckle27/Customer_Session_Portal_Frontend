@@ -13,3 +13,6 @@ body {
     font-family: "Interstate";
     src: url("./assets/fonts/Interstate-Regular-Font.ttf") format("truetype");
 }
+#body-backgound {
+    background-color: var(--body-background-color);
+}

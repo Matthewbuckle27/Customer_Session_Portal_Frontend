@@ -11,6 +11,7 @@
     color: var(--dashboard-title-color);
     font-weight: bold;
   }
+
   button {
     background-color: var(--button-color);
     border-radius: 30px;
@@ -19,55 +20,121 @@
   }
 }
 
-#dashboard {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 60%;
-  margin: 0 5%;
-  box-shadow: 0 0 5px 5px rgb(212, 212, 212);
-  border-radius: 12px;
-  overflow: auto;
+.dashboard {
+  background-color: var(--button-text);
+  margin: 0 8%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 9px var(--box-shadow-color);
+  min-height: 60%;
+
+  .table-container {
+    max-height: 42vh;
+  }
+
   th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
     font-size: var(--table-header);
     text-align: center;
-    background-color: var(--table-header-color);
   }
+
   td {
     text-align: center;
     font-size: var(--table-data);
   }
+
   tr {
     height: 7vh;
   }
-}
 
-.custom-width {
-  width: 4vw;
-}
-
-#options {
-  font-size: large;
-  padding-top: 3px;
-  color: var(--options-icon);
-  cursor: pointer;
+  #options {
+    font-size: large;
+    padding-top: 3px;
+    color: var(--options-icon);
+    cursor: pointer;
+  }
 }
 
 .paginator {
   display: flex;
   justify-content: center;
-  margin-top: auto;
+  position: absolute;
+  left: 28%;
+  top: 78%;
 }
 
-#archive {
-  width: 20px;
+#table-header {
+  background-color: var(--table-header-color);
 }
-@media screen and (max-width: 1020px) {
-  .welcome {
-    height: 19vh;
-  }
 
-  #dashboard {
-    margin-top: 20px;
+.small-column {
+  padding: 0px 2px;
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+  .dashboard {
+    height: 48%;
   }
+  .table-container {
+    height: 42vh;
+  }
+  .paginator {
+    display: flex;
+    justify-content: center;
+    left: 17%;
+    top: 74%;
+  }
+}
+
+@media (min-width: 280px) and (max-width: 440px) {
+  .dashboard {
+    height: 70%;
+  }
+  .table-container {
+    height: 45vh;
+  }
+  .paginator {
+    font-size: smaller;
+    display: flex;
+    justify-content: center;
+    left: 8%;
+    width: 80%;
+    height: 5vh;
+    top: 77%;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 720px) {
+  .dashboard {
+    height: 70%;
+  }
+  .table-container {
+    height: 45vh;
+  }
+  .paginator {
+    font-size: smaller;
+    display: flex;
+    justify-content: center;
+    left: 10%;
+    width: 80%;
+    height: 5vh;
+    top: 88%;
+  }
+}
+
+.mat-mdc-raised-button.mat-unthemed {
+  --mdc-protected-button-container-color: var(--button-color);
+  --mdc-protected-button-label-text-color: var(--text-color);
+}
+
+.mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
+  --mdc-tab-indicator-active-indicator-color: var(--custom-tab-active-color);
+  --mat-tab-header-active-label-text-color: var(--custom-tab-active-color);
+  --mat-tab-header-active-ripple-color: var(--custom-tab-active-color);
+  --mat-tab-header-active-focus-label-text-color: var(--custom-tab-active-color);
+  --mat-tab-header-active-hover-label-text-color: var(--custom-tab-active-color);
+  --mat-tab-header-active-focus-indicator-color: var(--custom-tab-active-color);
+  --mat-tab-header-active-hover-indicator-color: var(--custom-tab-active-color);
 }
