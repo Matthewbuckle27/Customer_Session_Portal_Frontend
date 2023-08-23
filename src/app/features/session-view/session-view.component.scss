@@ -1,5 +1,7 @@
 /* session-view.component.scss */
 @import url(/src/assets/styles/variables.scss);
+@import url(/src/assets/fonts/fonts.scss);
+
 
 $font: 'Times New Roman', Times, serif;
 
@@ -16,27 +18,23 @@ $font: 'Times New Roman', Times, serif;
   overflow: hidden;
 }
 
-.cdk-overlay-container, .cdk-global-overlay-wrapper {
-  pointer-events: none;
-  top: 0;
-  left: 0;
-  height: 0%!important;
-  width: 100%;
-}
-
 .close-button {
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: -5px;
+  right: 0px;
+  min-width: 10px;
+  min-height: 10px;
   color: var(--mat-header-color);
+  background-color: transparent;
+  border: none;
 }
 
 .dialog-title {
-  font-size: 22px;
+  font-size: var(--create--title-font);
   font-weight: bold;
   margin-bottom: 10px;
-  color:var(--mat-header-color);
   text-align: center;
+  color: var(--mat-header-color);
   padding-top: 0.9375rem;
 }
 
@@ -44,18 +42,21 @@ $font: 'Times New Roman', Times, serif;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  color: var(--mat-key-color);
 }
 
 .info-label {
   flex: 0 0 9.375rem;
-  font-weight: bold;
   margin-right: 10px;
+  color: var(--dialog-body-key-color);
+  font-size: var(--mdc-dialog-supporting-text-size, 1rem);
+  font-weight: var(--mdc-dialog-supporting-text-weight, 400);
 }
 
 .info-value {
+  color: #555;
   flex: 1;
   color:var(--mat-value-color);
+  font-size: 15px;
 }
 
 .box{
@@ -64,19 +65,20 @@ $font: 'Times New Roman', Times, serif;
   height: auto;
   border: 1px solid var(--mat-border-color);
   margin-left: -1px;
-  margin-top: -7px;
+  margin-top: -5px;
   padding-left: 5px;
 }
 
 .dialog-actions {
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .dialog-content {
   width: 100%;
   height: vh-100;
-  padding-left: 0.9375rem;
+  padding-left: 1.25rem;
   padding-top: 10px;
+  margin-top: 10px;
 }
 
 .header {

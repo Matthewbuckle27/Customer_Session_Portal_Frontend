@@ -11,6 +11,7 @@ export class SessionViewComponent {
     public dialogRef: MatDialogRef<SessionViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
+
   onCancelClick(): void {
     this.dialogRef.close();
   }

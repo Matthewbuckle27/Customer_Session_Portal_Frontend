@@ -4,12 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DashboardService } from '../../services/dashboard.service';
-<<<<<<< HEAD
 import { HttpClient } from '@angular/common/http';
 import { SessionViewComponent } from '../session-view/session-view.component';
-=======
 import { NewSessionComponent } from '../new-session/new-session.component';
->>>>>>> main
 
 @Component({
   selector: 'app-dashboard',
@@ -36,7 +33,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   createSessionDialog() {
     const dialogRef = this.dialog.open(NewSessionComponent, {
       width: '27%',
-      height:'80%'
+      height:'auto'
     });
 
     dialogRef.afterClosed().subscribe(result => {
