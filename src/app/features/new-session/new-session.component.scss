@@ -62,11 +62,12 @@ button {
 
 .close-button {
   position: absolute;
-  top: -15px;
+  top: -7px;
   right: 0px;
   min-width: 10px;
   min-height: 10px;
   color: var(--mat-header-color);
+  background-color: transparent;
 }
 
 .header {

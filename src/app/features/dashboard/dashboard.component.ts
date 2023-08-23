@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   createSessionDialog() {
     const dialogRef = this.dialog.open(NewSessionComponent, {
       width: '27%',
-      height:'80%'
+      height:'auto'
     });
 
     dialogRef.afterClosed().subscribe(result => {
