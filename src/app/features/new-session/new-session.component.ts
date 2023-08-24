@@ -18,10 +18,12 @@ export class NewSessionComponent {
     private sessionservice: NewSessionService) { }
 
   createSessionForm = this.fb.group({
+    customerId: ['', [Validators.required]],
     customerName: ['', [Validators.required]],
     sessionName: ['', [Validators.required]],
     remarks: ['', [Validators.required]]
   });
+  get customerId(){return this.createSessionForm.get("customerId")}
   get customerName() { return this.createSessionForm.get("customerName") }
   get sessionName() { return this.createSessionForm.get("sessionName") }
   get remarks() { return this.createSessionForm.get("remarks") }
