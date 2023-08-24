@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Session } from '../features/dashboard/dashboard.component';
-
 @Injectable({
   providedIn: 'root',
 })

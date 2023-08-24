@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,15 +22,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MomentFormatPipe } from './services/moment-format.pipe';
 import { MatDividerModule } from '@angular/material/divider';
-
 import { HttpClient } from '@angular/common/http';
 import { LoginComponent } from './features/login/login.component';
-import { SessionViewComponent } from './features/session-view/session-view.component';
+import { ViewSessionComponent } from './features/view-session/view-session.component';
 import { NewSessionComponent } from './features/new-session/new-session.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +34,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DashboardComponent,
     MomentFormatPipe,
     LoginComponent,
-    SessionViewComponent,
+    ViewSessionComponent,
     NewSessionComponent,
   ],
   imports: [
@@ -64,7 +59,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTabsModule,
     MatDividerModule,
     MatProgressSpinnerModule
-
   ],
   providers: [],
   bootstrap: [AppComponent],

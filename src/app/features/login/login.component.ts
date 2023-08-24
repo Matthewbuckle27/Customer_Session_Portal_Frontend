@@ -5,17 +5,23 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
+
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
+  
   login(): void {
     if (this.loginForm.valid) {
       const username = this.loginForm.get('username')?.value;
@@ -27,7 +33,8 @@ export class LoginComponent {
           this.errorMessage = 'Invalid Credentials!';
         }
       } else {
-        this.errorMessage = 'Username and password must be at most 10 characters long.';
+        this.errorMessage =
+          'Username and password must be at most 10 characters long.';
       }
     }
   }
