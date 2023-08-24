@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Session } from 'src/app/features/dashboard/dashboard.component';
-import { UpdateSessionDto } from 'src/app/features/edit-session/edit-session.component';
-
+import { Session } from '../../features/dashboard/dashboard.component';
+import { IUpdateSessionDto } from '../../features/models/session.model'
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +26,7 @@ export class SessionService {
     );
   }
 
-  updateSession(sessionID: number, updateSessionDto: UpdateSessionDto): Observable<Session> {
+  updateSession(sessionID: number, updateSessionDto: IUpdateSessionDto): Observable<Session> {
     const url = `${this.baseUrl}/${sessionID}`;
     return this._http.put<Session>(url, updateSessionDto);
   }

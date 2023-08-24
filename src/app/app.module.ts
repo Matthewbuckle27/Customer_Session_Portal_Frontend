@@ -64,11 +64,10 @@ import { ToastrModule } from 'ngx-toastr';
     MatProgressSpinnerModule,
     ToastrModule.forRoot(
       {
-        positionClass: 'toast-top-right', // Adjust the position as needed
-        preventDuplicates: true, // Prevent duplicate toasts
+        positionClass: 'toast-top-right',
+        preventDuplicates: true,
       }
     )
-    
   ],
   providers: [],
   bootstrap: [AppComponent],

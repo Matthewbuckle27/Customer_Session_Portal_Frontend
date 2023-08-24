@@ -2,9 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Session } from '../dashboard/dashboard.component';
-import { SessionService } from 'src/app/services/session/session.service';
+import { SessionService } from '../../services/session/session.service'
 import { ToastrService } from 'ngx-toastr';
-
+import { IUpdateSessionDto } from '../models/session.model';
 @Component({
   selector: 'app-edit-session',
   templateUrl: './edit-session.component.html',
@@ -18,7 +18,7 @@ export class EditSessionComponent {
     @Inject(MAT_DIALOG_DATA) public session: Session,
     private _dialogRef: MatDialogRef<EditSessionComponent>,
     private _toastrService: ToastrService,
-    private _sessionService:SessionService) {
+    private _sessionService: SessionService) {
     this.editForm = this._formBuilder.group({
       customerName: new FormControl({ value: this.session.customerName, disabled: true }),
       sessionName: new FormControl(this.session.sessionName, [Validators.required, Validators.minLength(8)]),
@@ -35,7 +35,7 @@ export class EditSessionComponent {
   onEditFormSubmit() {
     if (this.editForm.valid) {
       this.loading = true;
-      const updateDto: UpdateSessionDto = {
+      const updateDto: IUpdateSessionDto = {
         sessionName: this.editForm.value.sessionName,
         customerName: this.session.customerName,
         remarks: this.editForm.value.remarks,
@@ -47,7 +47,7 @@ export class EditSessionComponent {
             this._toastrService.success('Session successfully updated', 'Success');
             this._dialogRef.close(updateDto);
           },
-          (error:any) => {
+          (error: any) => {
             console.error('Error updating session:', error);
             if (error.status === 400) {
               this._toastrService.error(error.error.response, 'Error');
@@ -64,11 +64,4 @@ export class EditSessionComponent {
   onClose(): void {
     this._dialogRef.close();
   }
-}
-
-export interface UpdateSessionDto {
-  sessionName: string;
-  customerName: string;
-  remarks: string;
-  createdBy: string;
 }

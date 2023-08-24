@@ -6,7 +6,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DashboardService } from '../../services/dashboard.service';
 import { NewSessionComponent } from '../new-session/new-session.component';
 import { EditSessionComponent } from '../edit-session/edit-session.component';
-import { SessionService } from 'src/app/services/session/session.service';
+import { SessionService } from '../../services/session/session.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     })
     dialogRef.afterClosed().subscribe((updatedSession: Session) => {
       if (updatedSession) {
-        console.log(updatedSession);
         this.getActiveSessions();
       }
     });

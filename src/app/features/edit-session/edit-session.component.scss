@@ -1,24 +1,35 @@
 @import url(/src/assets/styles/variables.scss);
 @import url(/src/assets/fonts/fonts.scss);
 
-.title {
-    height: 9vh;
-    color: aliceblue;
-    display: flex;
-    padding-left: 1.25rem !important;
-    font-weight: bold;
-    width: 100%;
-    justify-content: space-between;
-    background: var(--header-bgcolor);
-    align-items: center;
+.close-button {
+    position: absolute;
+    top: 7px;
+    right: 0px;
+    min-width: 10px;
+    min-height: 10px;
+    color: var(--mat-header-color);
+    border: none;
+}
+
+.dialog-title {
     font-size: var(--edit--title-font);
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--mat-header-color);
+    padding-top: 0.9375rem;
+}
+
+.header {
+    align-items: start;
+    background: var(--header-bgcolor);
 }
 
 .dialog-content {
     display: flex;
     flex-direction: column;
     padding-left: 20px !important;
-    box-shadow: 0 4px 6px rgba(220, 230, 228, 0.1);
+    box-shadow: var(--dialog-content-box-shadow);
 
     textarea.mat-input-element {
         width: 100%;
@@ -33,28 +44,27 @@
     display: flex;
     align-items: center;
     margin-bottom: 8px;
-
 }
 
 .column-label {
-    width: 43%;
+    width: var(--dilaog-key-width);
     color: var(--dialog-body-key-color);
     font-weight: bold;
-    font-size: 18px;
+    font-size: var(--dialog-key-font-size);
 }
 
 .column-input {
     padding: 0px 2px;
-    width: 55%;
+    width: var(--dialog-value-width);
 
     mat-form-field {
         padding: 0;
-        width: 100%;
+        width: var(--mat-form-field-width);
         font-weight: bold;
     }
 
     font-weight: bold;
-    color: #000000;
+    color:var(--dialog-body-value-color);
 }
 
 .sName {
@@ -66,26 +76,22 @@
     justify-content: center;
 
     button {
-        width: 15rem;
-        border-radius: 20px;
+        width: var(--dialog-update-button-width);
+        border-radius: var(--dialog-update-button-radius);
         background: var(--button-color);
-        color: white;
-        font-size: 18px;
+        color: var(--dialog-update-button-color);
+        font-size: var(--dailog-update-button-font-size);
 
         &:not([disabled]) {
             background: var(--button-color);
         }
 
         &[disabled] {
-            background: grey;
+            background: var(--dialog-update-button-disabled-color);
         }
     }
 
     margin-top: 15px;
-}
-
-.dialog-content textarea {
-    width: 100%;
 }
 
 .remark {
@@ -101,14 +107,13 @@
 .sName mat-form-field {
     margin-left: 2px;
     max-width: 100%;
-
 }
 
 .loader-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 6.25rem;
+    height: var(--loader-height);
 }
 
 .error-message {
@@ -117,8 +122,8 @@
     top: 0;
     display: flex;
     align-items: center;
-    color: red;
-    font-size: 12px;
+    color: var(--dialog-error-message-color);
+    font-size: var(--dialog-error-message-font-size);
 }
 
 .error-icon {
@@ -131,18 +136,12 @@
 }
 
 .error-box {
-    background-color: #ffdddd;
+    background-color: var(--dialog-error-box-background-color);
     border-radius: 4px;
     padding: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--dialog-error-box-shadow);
     display: flex;
     align-items: center;
-}
-
-.remark textarea.mat-input-element {
-    color: #000000;
-    font-size: 17px !important;
-    font-weight: bold;
 }
 
 .spinner-container {
@@ -154,7 +153,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--loader-background-color);
     z-index: 9999;
-    color: skyblue !important;
 }

@@ -1,9 +1,10 @@
-<div class="title">
-    Edit Session
+<mat-toolbar class="header">
     <button mat-icon-button class="close-button" (click)="onClose()">
-        <mat-icon>close</mat-icon>
-    </button>
-</div>
+        <mat-icon>close</mat-icon></button>
+    <div class="dialog-title">
+        <h3>Edit Session</h3>
+    </div>
+</mat-toolbar>
 <div mat-dialog-content class="dialog-content">
     <div class="spinner-container" *ngIf="loading">
         <mat-spinner diameter="60" color="warn"></mat-spinner>
