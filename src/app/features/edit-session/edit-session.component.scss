@@ -156,3 +156,17 @@
     background-color: var(--loader-background-color);
     z-index: 9999;
 }
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .column-label {
+        width: 100%;
+    }
+
+    .column-input {
+        width: 100%;
+    }
+}
