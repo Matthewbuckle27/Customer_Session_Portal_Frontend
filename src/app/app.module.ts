@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './shared/components/header/header.component';
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,14 +22,19 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MomentFormatPipe } from './services/moment-format.pipe';
 import { MatDividerModule } from '@angular/material/divider';
+import { LoginComponent } from './features/login/login.component';
+import { ViewSessionComponent } from './features/view-session/view-session.component';
+import { NewSessionComponent } from './features/new-session/new-session.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     DashboardComponent,
     MomentFormatPipe,
+    LoginComponent,
+    ViewSessionComponent,
+    NewSessionComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     MatTabsModule,
     MatDividerModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

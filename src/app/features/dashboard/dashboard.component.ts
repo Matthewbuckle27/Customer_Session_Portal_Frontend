@@ -5,7 +5,8 @@ import { DashboardService } from '../../services/dashboard.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { IApiResponses, ISession } from '../models/session.model';
 import { MatDialog } from '@angular/material/dialog';
-import { LoaderService } from 'src/app/services/loader.service';
+import { ViewSessionComponent } from '../view-session/view-session.component';
+import { NewSessionComponent } from '../new-session/new-session.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +27,6 @@ export class DashboardComponent implements OnInit {
     'delete',
     'archiveFlag',
   ];
-
   archiveDisplayedColumns: string[] = [
     'sessionName',
     'sessionID',
@@ -108,8 +108,23 @@ export class DashboardComponent implements OnInit {
     const sessionId = session.sessionId;
   }
 
-  viewSession(session: ISession) {
-    const sessionId = session.sessionId;
+  viewSession(session: ISession): void {
+    const dialogref = this.dialog.open(ViewSessionComponent, {
+      width: '32%',
+      height: '70%',
+      data: session,
+    });
+    console.log(session.sessionId)
+  }
+
+  createSessionDialog() {
+    const dialogRef = this.dialog.open(NewSessionComponent, {
+      width: '27%',
+      height: 'auto',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      result;
+    });
   }
 
   transformSessionID(sessionId: string): string {

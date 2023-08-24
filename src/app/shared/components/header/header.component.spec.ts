@@ -2,10 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { LoginServiceService } from '../../../services/login-service.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from 'src/app/services/auth.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -14,7 +14,7 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      providers: [LoginServiceService],
+      providers: [AuthService],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
