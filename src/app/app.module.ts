@@ -22,7 +22,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MomentFormatPipe } from './services/moment-format.pipe';
 import { MatDividerModule } from '@angular/material/divider';
-import { HttpClient } from '@angular/common/http';
 import { LoginComponent } from './features/login/login.component';
 import { ViewSessionComponent } from './features/view-session/view-session.component';
 import { NewSessionComponent } from './features/new-session/new-session.component';
