@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { DashboardService } from './dashboard.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
@@ -10,7 +9,6 @@ describe('DashboardService', () => {
       providers: [DashboardService],
     });
   });
-
   it('should be created', () => {
     const service = TestBed.inject(DashboardService);
     expect(service).toBeTruthy();

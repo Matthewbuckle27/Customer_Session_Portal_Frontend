@@ -4,6 +4,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DashboardService } from '../../services/dashboard.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { IApiResponses, ISession } from '../models/session.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,17 +40,18 @@ export class DashboardComponent implements OnInit {
   dataSource = new MatTableDataSource<ISession>();
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-
   totalItems = 0;
   pageSizeOptions = [5, 10, 15];
-
   activeSessionsTab = true;
   archiveSessionsTab = false;
-
   pageSize = this.pageSizeOptions[0];
   currentPage = 0;
+  errorMessage = false;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private dialog: MatDialog
+  ) {}
 
   onTabChange(event: MatTabChangeEvent) {
     if (event.index === 1) {
@@ -81,26 +83,32 @@ export class DashboardComponent implements OnInit {
     const offset = this.currentPage;
     this.dashboardService
       .getSessions(sessionStatus, offset, this.pageSize)
-      .subscribe((response: IApiResponses) => {
-        this.dataSource.data = response.content;
-        this.totalItems = response.totalElements;
-      });
+      .subscribe(
+        (response: IApiResponses) => {
+          this.dataSource.data = response.content;
+          this.totalItems = response.totalElements;
+        },
+        (error) => {
+          this.errorMessage = true;
+          console.log(error);
+        }
+      );
   }
 
   editSession(session: ISession) {
-    const session1 = session;
+    const sessionId = session.sessionId;
   }
 
   deleteSession(session: ISession) {
-    const session1 = session;
+    const sessionId = session.sessionId;
   }
 
   archiveSession(session: ISession) {
-    const session1 = session;
+    const sessionId = session.sessionId;
   }
 
   viewSession(session: ISession) {
-    const session1 = session;
+    const sessionId = session.sessionId;
   }
 
   transformSessionID(sessionId: string): string {

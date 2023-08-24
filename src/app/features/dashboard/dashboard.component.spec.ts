@@ -9,12 +9,11 @@ import { DashboardService } from '../../services/dashboard.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { of } from 'rxjs';
 
 describe('DashboardComponent', () => {
   const dashboardServiceMock = {
-    getSessions: jest.fn().mockReturnValue(of([]))
+    getSessions: jest.fn().mockReturnValue(of([])),
   };
 
   let component: DashboardComponent;
@@ -23,8 +22,19 @@ describe('DashboardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      providers: [{ provide: DashboardService, useValue: dashboardServiceMock }],
-      imports: [NoopAnimationsModule, MatPaginatorModule, MatTableModule, MatTabsModule, MatDialogModule, HttpClientModule, MatMenuModule, MatIconModule],
+      providers: [
+        { provide: DashboardService, useValue: dashboardServiceMock },
+      ],
+      imports: [
+        NoopAnimationsModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatTabsModule,
+        MatDialogModule,
+        HttpClientModule,
+        MatMenuModule,
+        MatIconModule,
+      ],
     });
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;

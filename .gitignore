@@ -44,3 +44,4 @@ Thumbs.db
 # folders to avoid
 /node_modules
 /.angular
+/.vscode
