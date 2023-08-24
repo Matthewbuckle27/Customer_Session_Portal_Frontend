@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Session } from '../dashboard/dashboard.component';
+import { ISession }  from '../models/session.model';;
 import { SessionService } from '../../services/session/session.service'
 import { ToastrService } from 'ngx-toastr';
 import { IUpdateSessionDto } from '../models/session.model';
@@ -15,7 +15,7 @@ export class EditSessionComponent {
   updateButtonDisabled = true;
   editForm!: FormGroup
   constructor(private _formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public session: Session,
+    @Inject(MAT_DIALOG_DATA) public session: ISession,
     private _dialogRef: MatDialogRef<EditSessionComponent>,
     private _toastrService: ToastrService,
     private _sessionService: SessionService) {
@@ -40,7 +40,7 @@ export class EditSessionComponent {
         remarks: this.editForm.value.remarks,
         createdBy: this.session.createdBy
       };
-      this._sessionService.updateSession(this.session.sessionID, updateDto).subscribe(
+      this._sessionService.updateSession(this.session.sessionId, updateDto).subscribe(
         () => {
           this._toastrService.success('Session successfully updated', 'Success');
           this._dialogRef.close(updateDto);
