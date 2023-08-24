@@ -26,6 +26,9 @@ import { LoginComponent } from './features/login/login.component';
 import { ViewSessionComponent } from './features/view-session/view-session.component';
 import { NewSessionComponent } from './features/new-session/new-session.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EditSessionComponent } from './features/edit-session/edit-session.component';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +38,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LoginComponent,
     ViewSessionComponent,
     NewSessionComponent,
+    EditSessionComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     MatTabsModule,
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot(
+      {
+        positionClass: 'toast-top-right',
+        preventDuplicates: true,
+      }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent],

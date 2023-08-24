@@ -7,6 +7,7 @@ import { IApiResponses, ISession } from '../models/session.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewSessionComponent } from '../view-session/view-session.component';
 import { NewSessionComponent } from '../new-session/new-session.component';
+import { EditSessionComponent } from '../edit-session/edit-session.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -96,8 +97,16 @@ export class DashboardComponent implements OnInit {
       );
   }
 
-  editSession(session: ISession) {
-    const sessionId = session.sessionId;
+  editSession(session:ISession){
+    const dialogRef=this.dialog.open(EditSessionComponent,{
+      width:'35%',
+      data:session
+    })
+    dialogRef.afterClosed().subscribe((updatedSession: ISession) => {
+      if (updatedSession) {
+        this.getData();
+      }
+    });
   }
 
   deleteSession(session: ISession) {
@@ -137,3 +146,5 @@ export class DashboardComponent implements OnInit {
     }
   }
 }
+export { ISession };
+
