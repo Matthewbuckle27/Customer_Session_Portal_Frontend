@@ -5,6 +5,7 @@ import { DashboardService } from '../../services/dashboard.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { IApiResponses, ISession } from '../models/session.model';
 import { MatDialog } from '@angular/material/dialog';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,7 +51,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   onTabChange(event: MatTabChangeEvent) {

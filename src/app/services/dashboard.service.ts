@@ -18,7 +18,6 @@ export class DashboardService {
     pageSize: number
   ): Observable<IApiResponses> {
     const url = `${this.sessions}/${sessionStatus}/${offset}/${pageSize}`;
-    this.loaderservice.show();
     return this.http.get<IApiResponses>(url);
   }
 }
