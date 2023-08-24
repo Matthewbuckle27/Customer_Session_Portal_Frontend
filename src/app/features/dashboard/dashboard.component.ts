@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DashboardService } from '../../services/dashboard.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { IApiResponses, ISession } from '../models/session.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewSessionComponent } from '../view-session/view-session.component';
 import { NewSessionComponent } from '../new-session/new-session.component';
 
 @Component({
@@ -11,110 +13,127 @@ import { NewSessionComponent } from '../new-session/new-session.component';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
-  activeTabColor = 'red';
-  dataSource = new MatTableDataSource<Session>();
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
-  ngOnInit(): void {
-    this.getActiveSessions();
-  }
-
-  constructor(
-    private dashboardService: DashboardService,
-    private dialog: MatDialog
-  ) {}
-
-  createSessionDialog() {
-    const dialogRef = this.dialog.open(NewSessionComponent, {
-      width: '28%',
-      height:'auto'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-    });
-  }
-
+export class DashboardComponent implements OnInit {
   activeDisplayedColumns: string[] = [
     'sessionName',
     'sessionID',
     'customerName',
     'createdBy',
-    'updatedBy',
     'createdOn',
     'updatedOn',
     'status',
     'view',
     'edit',
     'delete',
-    'archive',
+    'archiveFlag',
   ];
-
   archiveDisplayedColumns: string[] = [
     'sessionName',
     'sessionID',
     'customerName',
     'createdBy',
-    'updatedBy',
     'createdOn',
     'updatedOn',
     'status',
     'view',
   ];
 
+  dataSource = new MatTableDataSource<ISession>();
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  totalItems = 0;
+  pageSizeOptions = [5, 10, 15];
+  activeSessionsTab = true;
+  archiveSessionsTab = false;
+  pageSize = this.pageSizeOptions[0];
+  currentPage = 0;
+  errorMessage = false;
+
+  constructor(
+    private dashboardService: DashboardService,
+    private dialog: MatDialog,
+  ) {}
+
   onTabChange(event: MatTabChangeEvent) {
     if (event.index === 1) {
-      this.getArchiveSessions();
+      this.archiveSessionsTab = true;
+      this.activeSessionsTab = false;
     } else {
-      this.getActiveSessions();
+      this.activeSessionsTab = true;
+      this.archiveSessionsTab = false;
     }
+    this.totalItems = 0;
+    this.currentPage = 0;
+    this.paginator.pageIndex = 0;
+    this.getData();
   }
 
-  getActiveSessions() {
-    this.dashboardService.getActiveSessions().subscribe((z) => {
-      this.dataSource.data = z;
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  onPageChange(event: PageEvent) {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getData();
+  }
+
+  getData() {
+    this.dataSource.paginator = null;
+    const sessionStatus = this.activeSessionsTab === true ? 'A' : 'X';
+    const offset = this.currentPage;
+    this.dashboardService
+      .getSessions(sessionStatus, offset, this.pageSize)
+      .subscribe(
+        (response: IApiResponses) => {
+          this.dataSource.data = response.content;
+          this.totalItems = response.totalElements;
+        },
+        (error) => {
+          this.errorMessage = true;
+          console.log(error);
+        }
+      );
+  }
+
+  editSession(session: ISession) {
+    const sessionId = session.sessionId;
+  }
+
+  deleteSession(session: ISession) {
+    const sessionId = session.sessionId;
+  }
+
+  archiveSession(session: ISession) {
+    const sessionId = session.sessionId;
+  }
+
+  viewSession(session: ISession): void {
+    const dialogref = this.dialog.open(ViewSessionComponent, {
+      width: '32%',
+      height: '70%',
+      data: session,
+    });
+    console.log(session.sessionId)
+  }
+
+  createSessionDialog() {
+    const dialogRef = this.dialog.open(NewSessionComponent, {
+      width: '28%',
+      height: 'auto',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      result;
     });
   }
 
-  getArchiveSessions() {
-    this.dashboardService.getArchivedSessions().subscribe((z) => {
-      this.dataSource.data = z;
-    });
-  }
-
-  transformSessionID(sessionID: string): string {
-    if (sessionID.length >= 8) {
-      const prefix = sessionID.slice(0, 6);
+  transformSessionID(sessionId: string): string {
+    if (sessionId.length >= 2) {
+      const prefix = sessionId.slice(0, 10);
       const maskedSuffix = 'XXXX';
       return prefix + maskedSuffix;
     } else {
-      return sessionID;
+      return sessionId;
     }
   }
-
-  isArchiveable(updatedOn: string): boolean {
-    const tenDaysInMilliseconds = 10 * 24 * 60 * 60 * 1000;
-    const updatedDate = new Date(updatedOn);
-    const currentDate = new Date();
-    const timeDifference = currentDate.getTime() - updatedDate.getTime();
-    return timeDifference >= tenDaysInMilliseconds;
-  }
-}
-
-export interface Session {
-  sessionName: string;
-  sessionID: number;
-  remarks: string;
-  createdBy: string;
-  updatedBy: string;
-  createdOn: Date;
-  updatedOn: Date;
-  status: string;
-  customerName: string;
 }
