@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       width: '27%',
       height:'80%'
     });
-
+    
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
     });

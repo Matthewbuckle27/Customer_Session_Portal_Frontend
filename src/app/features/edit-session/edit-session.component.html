@@ -6,9 +6,6 @@
     </div>
 </mat-toolbar>
 <div mat-dialog-content class="dialog-content">
-    <div class="spinner-container" *ngIf="loading">
-        <mat-spinner diameter="60" color="warn"></mat-spinner>
-    </div>
     <form [formGroup]="editForm" (ngSubmit)="onEditFormSubmit()">
         <div class="row">
             <div class="column-label">
@@ -75,7 +72,7 @@
             </mat-form-field>
         </div>
         <div class="update-button">
-            <button mat-raised-button [disabled]="  !editForm.valid || updateButtonDisabled"
+            <button mat-raised-button [disabled]=" !editForm.valid || updateButtonDisabled"
                 type="submit">Update</button>
         </div>
     </form>
