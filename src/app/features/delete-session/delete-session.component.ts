@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { SessionService } from 'src/app/services/session-service/session.service';
+import { SessionService } from '../../services/session-service/session.service';
 import { ISession } from '../models/session.model';
 
 @Component({
