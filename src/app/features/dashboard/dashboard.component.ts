@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ViewSessionComponent } from '../view-session/view-session.component';
 import { NewSessionComponent } from '../new-session/new-session.component';
 import { EditSessionComponent } from '../edit-session/edit-session.component';
-import { SessionService } from 'src/app/services/session-service/session.service';
+import { SessionService } from '../../services/session-service/session.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
   errorMessage = false;
 
   constructor(
-    private dashboardService: SessionService,
+    private sessionService: SessionService,
     private dialog: MatDialog
   ) {}
 
@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit {
     this.dataSource.paginator = null;
     const sessionStatus = this.activeSessionsTab === true ? 'A' : 'X';
     const offset = this.currentPage;
-    this.dashboardService
+    this.sessionService
       .getSessions(sessionStatus, offset, this.pageSize)
       .subscribe(
         (response: IApiResponses) => {
@@ -92,7 +92,6 @@ export class DashboardComponent implements OnInit {
         },
         (error: Error) => {
           this.errorMessage = true;
-          console.log(error);
         }
       );
   }
@@ -123,7 +122,6 @@ export class DashboardComponent implements OnInit {
       height: '60%',
       data: session,
     });
-    console.log(session.sessionId);
   }
 
   createSessionDialog() {

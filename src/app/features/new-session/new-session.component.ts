@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SessionService } from 'src/app/services/session-service/session.service';
+import { SessionService } from '../../services/session-service/session.service';
 
 @Component({
   selector: 'app-new-session',

@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 import { SessionService } from 'src/app/services/session-service/session.service';
 
 describe('DashboardComponent', () => {
-  const dashboardServiceMock = {
+  const sessionServiceMock = {
     getSessions: jest.fn().mockReturnValue(of([])),
   };
 
@@ -23,7 +23,7 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
       providers: [
-        { provide: SessionService, useValue: dashboardServiceMock },
+        { provide: SessionService, useValue: sessionServiceMock },
       ],
       imports: [
         NoopAnimationsModule,
@@ -47,8 +47,8 @@ describe('DashboardComponent', () => {
 
   it('should call getActiveSessions when the active tab is changed', () => {
     const tabChangeEvent = { index: 0 } as MatTabChangeEvent;
-    const dashboardService = TestBed.inject(SessionService);
+    const sesionService = TestBed.inject(SessionService);
     component.onTabChange(tabChangeEvent);
-    expect(dashboardService.getSessions).toHaveBeenCalled();
+    expect(sesionService.getSessions).toHaveBeenCalled();
   });
 });
