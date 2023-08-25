@@ -8,6 +8,7 @@ import { ViewSessionComponent } from '../view-session/view-session.component';
 import { NewSessionComponent } from '../new-session/new-session.component';
 import { EditSessionComponent } from '../edit-session/edit-session.component';
 import { SessionService } from '../../services/session-service/session.service';
+import { DeleteSessionComponent } from '../delete-session/delete-session.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -108,8 +109,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  deleteSession(session: ISession) {
-    const sessionId = session.sessionId;
+  deleteSession(session:ISession):void{
+    const dialogRef=this.dialog.open(DeleteSessionComponent,{
+      width:'35%',
+      data:session
+    })
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getData();
+    });
   }
 
   archiveSession(session: ISession) {
