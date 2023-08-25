@@ -2,14 +2,14 @@
 @import url(/src/assets/styles/variables.scss);
 @import url(/src/assets/fonts/fonts.scss);
 
-$font: 'Times New Roman', Times, serif;
+$font: "Times New Roman", Times, serif;
 
 .dialog-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-family: $font!important;
+  font-family: $font !important;
   background-color: var(--mat-popup-bgcolor);
   border-radius: 0px;
   position: relative;
@@ -53,18 +53,19 @@ $font: 'Times New Roman', Times, serif;
 
 .info-value {
   flex: 1;
-  color:var(--mat-value-color);
+  color: var(--mat-value-color);
   font-size: 17px;
 }
 
-.box{
+.box {
   margin: 1.25rem;
-  width:auto;
+  width: 28vw;
   height: auto;
   border: 1px solid var(--mat-border-color);
   margin-left: -1px;
   margin-top: -5px;
   padding-left: 5px;
+  border-radius: 5px;
 }
 
 .dialog-actions {

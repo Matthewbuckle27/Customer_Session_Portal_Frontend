@@ -37,10 +37,12 @@ mat-dialog-content {
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: -4px;
+  font-weight: bold;
 
   mat-label {
     width: 43%;
     padding-top: 0.5rem;
+    font-weight: bold;
   }
 
   mat-form-field {
@@ -57,6 +59,7 @@ mat-dialog-content {
   color: var(--dialog-body-key-color);
   display: flex;
   flex-direction: column;
+  font-weight: bold;
   margin-bottom: -4px;
 }
 

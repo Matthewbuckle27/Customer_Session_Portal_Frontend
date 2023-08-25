@@ -1,8 +1,8 @@
 export interface IUpdateSessionDto {
-    sessionName: string;
-    customerName: string;
-    remarks: string;
-    createdBy: string;
+  sessionName: string;
+  customerName: string;
+  remarks: string;
+  createdBy: string;
 }
 
 export interface ISession {
