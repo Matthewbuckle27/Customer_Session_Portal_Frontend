@@ -5,7 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/authentication-service/auth.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

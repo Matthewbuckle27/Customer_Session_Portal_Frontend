@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/authentication-service/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-
 export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
@@ -21,7 +20,7 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
-  
+
   login(): void {
     if (this.loginForm.valid) {
       const username = this.loginForm.get('username')?.value;

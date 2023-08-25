@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { DashboardService } from '../../services/dashboard.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { IApiResponses, ISession } from '../models/session.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewSessionComponent } from '../view-session/view-session.component';
 import { NewSessionComponent } from '../new-session/new-session.component';
 import { EditSessionComponent } from '../edit-session/edit-session.component';
+import { SessionService } from 'src/app/services/session-service/session.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -51,8 +51,8 @@ export class DashboardComponent implements OnInit {
   errorMessage = false;
 
   constructor(
-    private dashboardService: DashboardService,
-    private dialog: MatDialog,
+    private dashboardService: SessionService,
+    private dialog: MatDialog
   ) {}
 
   onTabChange(event: MatTabChangeEvent) {
@@ -90,18 +90,18 @@ export class DashboardComponent implements OnInit {
           this.dataSource.data = response.content;
           this.totalItems = response.totalElements;
         },
-        (error) => {
+        (error: Error) => {
           this.errorMessage = true;
           console.log(error);
         }
       );
   }
 
-  editSession(session:ISession){
-    const dialogRef=this.dialog.open(EditSessionComponent,{
-      width:'35%',
-      data:session
-    })
+  editSession(session: ISession) {
+    const dialogRef = this.dialog.open(EditSessionComponent, {
+      width: '35%',
+      data: session,
+    });
     dialogRef.afterClosed().subscribe((updatedSession: ISession) => {
       if (updatedSession) {
         this.getData();
@@ -120,10 +120,10 @@ export class DashboardComponent implements OnInit {
   viewSession(session: ISession): void {
     const dialogref = this.dialog.open(ViewSessionComponent, {
       width: '32%',
-      height: '70%',
+      height: '60%',
       data: session,
     });
-    console.log(session.sessionId)
+    console.log(session.sessionId);
   }
 
   createSessionDialog() {
@@ -146,5 +146,3 @@ export class DashboardComponent implements OnInit {
     }
   }
 }
-export { ISession };
-

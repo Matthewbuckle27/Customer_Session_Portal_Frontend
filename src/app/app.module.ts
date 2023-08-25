@@ -20,14 +20,14 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MomentFormatPipe } from './services/moment-format.pipe';
+import { MomentFormatPipe } from './shared/pipes/moment-format.pipe';
 import { MatDividerModule } from '@angular/material/divider';
-import { LoginComponent } from './features/login/login.component';
 import { ViewSessionComponent } from './features/view-session/view-session.component';
-import { NewSessionComponent } from './features/new-session/new-session.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditSessionComponent } from './features/edit-session/edit-session.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NewSessionComponent } from './features/new-session/new-session.component';
+import { LoginComponent } from './features/login/login.component';
 
 @NgModule({
   declarations: [
@@ -35,10 +35,10 @@ import { ToastrModule } from 'ngx-toastr';
     HeaderComponent,
     DashboardComponent,
     MomentFormatPipe,
-    LoginComponent,
     ViewSessionComponent,
-    NewSessionComponent,
     EditSessionComponent,
+    NewSessionComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,12 +62,10 @@ import { ToastrModule } from 'ngx-toastr';
     MatTabsModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    ToastrModule.forRoot(
-      {
-        positionClass: 'toast-top-right',
-        preventDuplicates: true,
-      }
-    )
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
