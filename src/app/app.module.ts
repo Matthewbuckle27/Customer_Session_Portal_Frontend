@@ -28,6 +28,7 @@ import { EditSessionComponent } from './features/edit-session/edit-session.compo
 import { ToastrModule } from 'ngx-toastr';
 import { NewSessionComponent } from './features/new-session/new-session.component';
 import { LoginComponent } from './features/login/login.component';
+import { DeleteSessionComponent } from './features/delete-session/delete-session.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LoginComponent } from './features/login/login.component';
     EditSessionComponent,
     NewSessionComponent,
     LoginComponent,
+    DeleteSessionComponent,
   ],
   imports: [
     BrowserModule,

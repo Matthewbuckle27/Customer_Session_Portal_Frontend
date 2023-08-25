@@ -31,4 +31,9 @@ export class SessionService {
     const url = `${this.sessions}`;
     return this.http.post<ISession>(url, sessionData);
   }
+
+  deleteSession(sessionID: number): Observable<any> {
+    const url = `${this.sessions}/${sessionID}`;
+    return this.http.delete(url);
+  }
 }
