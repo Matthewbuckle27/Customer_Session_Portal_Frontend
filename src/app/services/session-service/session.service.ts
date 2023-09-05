@@ -1,7 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IApiResponses, ISession } from '../../features/models/session.model';
+import {
+  IApiResponses,
+  ICreateSessionDto,
+  IResponseDto,
+} from '../../features/models/session.model';
 import { IUpdateSessionDto } from '../../features/models/session.model';
 @Injectable({
   providedIn: 'root',
@@ -11,29 +15,37 @@ export class SessionService {
   constructor(private http: HttpClient) {}
 
   getSessions(
-    sessionStatus: string,
+    status: string,
     offset: number,
     pageSize: number
   ): Observable<IApiResponses> {
-    const url = `${this.sessions}/${sessionStatus}/${offset}/${pageSize}`;
-    return this.http.get<IApiResponses>(url);
+    const params = new HttpParams()
+      .set('pageNo', offset.toString())
+      .set('pageSize', pageSize.toString());
+    return this.http.get<IApiResponses>(`${this.sessions}/${status}`, {
+      params,
+    });
   }
 
+  createSession(sessionData: ICreateSessionDto): Observable<IResponseDto> {
+    const url = `${this.sessions}`;
+    return this.http.post<IResponseDto>(url, sessionData);
+  }
+
+  deleteSession(sessionId: number): Observable<IResponseDto> {
+    const url = `${this.sessions}/${sessionId}`;
+    return this.http.delete<IResponseDto>(url);
+  }
+
+  archiveSession(sessionId: number): Observable<IResponseDto> {
+    const url = `${this.sessions}/archive/${sessionId}`;
+    return this.http.put<IResponseDto>(url, null);
+  }
   updateSession(
     sessionID: number,
     updateSessionDto: IUpdateSessionDto
-  ): Observable<ISession> {
+  ): Observable<IResponseDto> {
     const url = `${this.sessions}/${sessionID}`;
-    return this.http.put<ISession>(url, updateSessionDto);
-  }
-
-  createSession(sessionData: any): Observable<ISession> {
-    const url = `${this.sessions}`;
-    return this.http.post<ISession>(url, sessionData);
-  }
-
-  deleteSession(sessionID: number): Observable<any> {
-    const url = `${this.sessions}/${sessionID}`;
-    return this.http.delete(url);
+    return this.http.put<IResponseDto>(url, updateSessionDto);
   }
 }

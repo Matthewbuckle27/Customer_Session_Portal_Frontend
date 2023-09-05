@@ -107,9 +107,13 @@
             <tr mat-row *matRowDef="let row; columns: activeDisplayedColumns"></tr>
           </div>
         </table>
-        <div id="error-container" *ngIf="errorMessage">
-          <img src="./../../../assets/images/connection-error.png" alt="Connection Lost" id="error-image"/>
-          <p>Unable to load the data. Please check your internet connection.</p>
+        <div id="nodata-container" *ngIf="errorMessage">
+          <img src="./../../../assets/images/connection-error.png" alt="Connection Lost" id="no-data-found"/>
+          <p id="error-text">Unable to load the data. Please check your internet connection.</p>
+        </div>
+        <div id="error-container" *ngIf="noSessions">
+          <img src="./../../../assets/images/empty.png" alt="No Data Found" id="error-image"/>
+          <p>No Data To Display</p>
         </div>
       </div>
     </mat-tab>
@@ -167,10 +171,17 @@
           <tr mat-header-row *matHeaderRowDef="archiveDisplayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: archiveDisplayedColumns"></tr>
         </table>
+        <div id="nodata-container" *ngIf="errorMessage">
+          <img src="./../../../assets/images/connection-error.png" alt="Connection Lost" id="no-data-found"/>
+          <p id="error-text">Unable to load the data. Please check your internet connection.</p>
+        </div>
+        <div id="error-container" *ngIf="noSessions">
+          <img src="./../../../assets/images/empty.png" alt="No Data Found" id="error-image"/>
+          <p>No Data To Display</p>
+        </div>
       </div>
     </mat-tab>
   </mat-tab-group>
-
   <div class="paginator">
     <mat-paginator
       [pageSizeOptions]="pageSizeOptions"

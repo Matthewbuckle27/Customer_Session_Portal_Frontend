@@ -33,8 +33,12 @@
                                         Session Name is required.
                                     </div>
                                     <div *ngIf="editForm.get('sessionName')?.hasError('minlength')"
-                                        matTooltip="Session Name must be at least 10 characters long.">
-                                        Session Name must be at least 10 characters long.
+                                        matTooltip="Session Name must be at least 4 characters long.">
+                                        Session Name must be at least 4 characters long.
+                                    </div>
+                                    <div *ngIf="editForm.get('sessionName')?.hasError('pattern')"
+                                        matTooltip="Session Name will not contain special characters">
+                                        Session Name will not contain special characters.
                                     </div>
                                 </div>
                             </div>
@@ -62,8 +66,12 @@
                                     Remarks is required.
                                 </div>
                                 <div *ngIf="editForm.get('remarks')?.hasError('minlength')"
-                                    matTooltip="Remarks must be at least 10 characters long.">
-                                    Remarks must be at least 10 characters long.
+                                    matTooltip="Remarks must be at least 4 characters long.">
+                                    Remarks must be at least 4 characters long.
+                                </div>
+                                <div *ngIf="editForm.get('remarks')?.hasError('maxlength')"
+                                    matTooltip="Remarks should not exceed 255 characters">
+                                    Remarks should not exceed 255 characters
                                 </div>
                             </div>
                         </div>

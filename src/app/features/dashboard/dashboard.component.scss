@@ -73,9 +73,22 @@
 }
 
 #error-container {
-  margin-left: 28vw;
+  margin-left: 38vw;
   margin-top: 10vh;
   align-self: center;
+}
+#nodata-container{
+  margin-top: 10vh;
+  align-self: center;
+}
+#error-text{
+  margin-left: 27vw;
+}
+#error-image{
+ margin-left: 2.3vw;
+}
+#no-data-found{
+  margin-left: 40vw;
 }
 
 img {
@@ -178,3 +191,4 @@ img {
   --mat-tab-header-active-focus-indicator-color: var(--custom-tab-active-color);
   --mat-tab-header-active-hover-indicator-color: var(--custom-tab-active-color);
 }
+
