@@ -1,10 +1,19 @@
 export interface IUpdateSessionDto {
   sessionName: string;
-  customerName: string;
   remarks: string;
-  createdBy: string;
+}
+export interface IResponseDto {
+  message: string;
+  httpStatus: string;
+  sessionResponseDTO: ISession;
 }
 
+export interface ICreateSessionDto{
+  customerId:string;
+  sessionName:string;
+  remarks:string;
+  createdBy:string;
+}
 export interface ISession {
   sessionName: string;
   sessionId: number;
@@ -23,7 +32,7 @@ export interface IUserData {
 }
 
 export interface IApiResponses {
-  content: ISession[];
+  session: ISession[];
   pageable: {
     sort: {
       empty: boolean;

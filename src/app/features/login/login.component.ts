@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/authentication-service/auth.service';
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/authentication-service/auth.service'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   errorMessage = '';
   constructor(
@@ -19,6 +19,11 @@ export class LoginComponent {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['/home']);
+    }
   }
 
   login(): void {

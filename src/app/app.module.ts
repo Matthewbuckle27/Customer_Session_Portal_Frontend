@@ -17,7 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MomentFormatPipe } from './shared/pipes/moment-format.pipe';
@@ -29,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NewSessionComponent } from './features/new-session/new-session.component';
 import { LoginComponent } from './features/login/login.component';
 import { DeleteSessionComponent } from './features/delete-session/delete-session.component';
+import { SessionInterceptor } from './services/api/session-interceptor';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,7 @@ import { DeleteSessionComponent } from './features/delete-session/delete-session
       preventDuplicates: true,
     }),
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:SessionInterceptor,multi:true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

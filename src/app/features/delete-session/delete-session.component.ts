@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SessionService } from '../../services/session-service/session.service';
 import { ISession } from '../models/session.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delete-session',
@@ -12,7 +13,8 @@ export class DeleteSessionComponent {
   constructor(
     public _dialogRef: MatDialogRef<DeleteSessionComponent>,
     @Inject(MAT_DIALOG_DATA) public session: ISession,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private _toastrService:ToastrService
   ) { }
 
   onCancelClick(): void {
@@ -21,7 +23,11 @@ export class DeleteSessionComponent {
 
   deleteSession() {
     this.sessionService.deleteSession(this.session.sessionId).subscribe(
-      () => {
+      (response) => {
+        this._toastrService.success(
+          response.message,
+          'Success'
+        )
         this._dialogRef.close();
       },
       (error) => {

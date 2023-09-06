@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ISession } from '../models/session.model';
+import { IResponseDto, ISession } from '../models/session.model';
 import { SessionService } from '../../services/session-service/session.service';
 import { ToastrService } from 'ngx-toastr';
 import { IUpdateSessionDto } from '../models/session.model';
@@ -54,21 +54,19 @@ export class EditSessionComponent implements OnInit {
     if (this.editForm.valid) {
       const updateDto: IUpdateSessionDto = {
         sessionName: this.editForm.value.sessionName,
-        customerName: this.session.customerName,
         remarks: this.editForm.value.remarks,
-        createdBy: this.session.createdBy,
       };
       this._sessionService
         .updateSession(this.session.sessionId, updateDto)
         .subscribe(
-          () => {
+          (x:IResponseDto) => {
             this._toastrService.success(
-              'Session successfully updated',
+              `${x.message}`,
               'Success'
             );
             this._dialogRef.close(updateDto);
           },
-          (error: any) => {
+          (error) => {
             console.error('Error updating session:', error);
             if (error.status === 400) {
               this._toastrService.error(error.error.response, 'Error');
@@ -78,6 +76,8 @@ export class EditSessionComponent implements OnInit {
         );
     }
   }
+
+  
 
   onClose(): void {
     this._dialogRef.close();
