@@ -37,7 +37,7 @@ export class SessionService {
     const url = `${this.sessions}/${sessionID}`;
     return this.http.put<IResponseDto>(url, updateSessionDto);
   }
-  archiveSession(sessionId: number): Observable<IResponseDto> {
+  archiveSession(sessionId: string): Observable<IResponseDto> {
     const url = `${this.sessions}/archive/${sessionId}`;
     return this.http.put<IResponseDto>(url, null);
   }
