@@ -34,11 +34,13 @@ export class EditSessionComponent implements OnInit {
       }),
       sessionName: new FormControl(this.session.sessionName, [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(4),
+        Validators.pattern("^[a-zA-Z0-9 ]+$")
       ]),
       remarks: new FormControl(this.session.remarks, [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(4),
+        Validators.maxLength(255)
       ]),
     });
   }

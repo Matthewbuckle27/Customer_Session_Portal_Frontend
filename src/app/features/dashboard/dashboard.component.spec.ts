@@ -22,9 +22,7 @@ describe('DashboardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      providers: [
-        { provide: SessionService, useValue: sessionServiceMock },
-      ],
+      providers: [{ provide: SessionService, useValue: sessionServiceMock }],
       imports: [
         NoopAnimationsModule,
         MatPaginatorModule,

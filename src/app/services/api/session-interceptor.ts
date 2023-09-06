@@ -1,21 +1,30 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, catchError, throwError } from "rxjs";
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+
+import { Injectable } from '@angular/core';
+
+import { Observable, catchError, throwError } from 'rxjs';
+import { ISession } from 'src/app/features/models/session.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionInterceptor implements HttpInterceptor {
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('HTTP Request Started ');
-        return next.handle(req)
-            .pipe(
-                catchError((error: HttpErrorResponse) => {
-                    console.log(error);
-                    return throwError(error)
-                })
-            );
-
-    }
-
+  intercept(
+    req: HttpRequest<ISession>,
+    next: HttpHandler
+  ): Observable<HttpEvent<ISession>> {
+    return next
+      .handle(req)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          return throwError(error);
+        })
+      );
+  }
 }

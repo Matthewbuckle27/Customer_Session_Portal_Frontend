@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SessionService } from '../../services/session-service/session.service';
-import { ICreateSessionDto } from '../models/session.model';
+import { ICreateSessionDto, IResponseDto } from '../models/session.model';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-session',
@@ -18,13 +19,23 @@ export class NewSessionComponent {
     private popup: MatDialogRef<NewSessionComponent>,
     private fb: FormBuilder,
     private sessionservice: SessionService,
-    private route:Router
+    private toastrService: ToastrService
   ) {}
 
   createSessionForm = this.fb.group({
     customerId: ['', [Validators.required]],
-    sessionName: ['', [Validators.required,Validators.minLength(4),Validators.pattern('[a-zA-Z0-9 ]*')]],
-    remarks: ['', [Validators.required,Validators.minLength(4),Validators.maxLength(255)]],
+    sessionName: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.pattern('^[a-zA-Z0-9 ]+$'),
+      ],
+    ],
+    remarks: [
+      '',
+      [Validators.required, Validators.maxLength(255), Validators.minLength(4)],
+    ],
   });
   get customerId() {
     return this.createSessionForm.get('customerId');
@@ -37,26 +48,24 @@ export class NewSessionComponent {
   }
 
   createSession() {
-    this.isLoading=true;
-    localStorage.setItem('RMname','RM1')
+    localStorage.setItem('RMname', 'Ram');
     const sessionData: ICreateSessionDto = {
-    customerId: this.createSessionForm.value.customerId || '',
-    sessionName: this.createSessionForm.value.sessionName||'',
-    remarks: this.createSessionForm.value.remarks||'',
-    createdBy: localStorage.getItem('RMname') || ''
-  };
-  
-  this.sessionservice.createSession(sessionData).subscribe(
-    () => {
-      this.route.navigateByUrl('/home');
-      this.closeModal();
-    },
-    () => {
-      this.errorMessage = 'Failed to create the session!';
-      this.isLoading = false;
-    }
-  );
-}
+      customerId: this.createSessionForm.value.customerId || '',
+      sessionName: this.createSessionForm.value.sessionName || '',
+      remarks: this.createSessionForm.value.remarks || '',
+      createdBy: localStorage.getItem('RMname') || '',
+    };
+    this.sessionservice.createSession(sessionData).subscribe(
+      (x: IResponseDto) => {
+        this.closeModal();
+        this.toastrService.success(`${x.message}`, 'Success');
+      },
+      () => {
+        this.errorMessage = 'Failed to create the session!';
+        this.isLoading = false;
+      }
+    );
+  }
   closeModal() {
     this.popup.close();
   }

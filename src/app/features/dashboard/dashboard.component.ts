@@ -9,8 +9,8 @@ import { NewSessionComponent } from '../new-session/new-session.component';
 import { EditSessionComponent } from '../edit-session/edit-session.component';
 import { SessionService } from '../../services/session-service/session.service';
 import { DeleteSessionComponent } from '../delete-session/delete-session.component';
-import { ToastrService } from 'ngx-toastr';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -51,15 +51,15 @@ export class DashboardComponent implements OnInit {
   archiveSessionsTab = false;
   pageSize = this.pageSizeOptions[0];
   currentPage = 0;
-  errorMessage = true;
-  
+  errorMessage = false;
+  noSessions = false;
 
   constructor(
     private sessionService: SessionService,
     private dialog: MatDialog,
-    private _toastrService:ToastrService,
+    private _toastrService: ToastrService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   onTabChange(event: MatTabChangeEvent) {
     if (event.index === 1) {
@@ -86,6 +86,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getData() {
+    this.dataSource.data = [];
+    this.errorMessage = false;
     this.dataSource.paginator = null;
     const sessionStatus = this.activeSessionsTab === true ? 'A' : 'X';
     const offset = this.currentPage;
@@ -93,13 +95,16 @@ export class DashboardComponent implements OnInit {
       .getSessions(sessionStatus, offset, this.pageSize)
       .subscribe(
         (response: IApiResponses) => {
-          this.errorMessage = false;
+          this.noSessions = false;
           this.dataSource.data = response.session;
           this.totalItems = response.totalElements;
         },
-        (error: Error) => {
-         console.log();
-          this.dataSource.data=[];
+        (error) => {
+          if (error.status === 400) {
+            this.noSessions = true;
+          } else {
+            this.errorMessage = true;
+          }
         }
       );
   }
@@ -116,12 +121,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  deleteSession(session:ISession):void{
-    const dialogRef=this.dialog.open(DeleteSessionComponent,{
-      width:'35%',
-      data:session
-    })
-    dialogRef.afterClosed().subscribe((result) => {
+  deleteSession(session: ISession): void {
+    const dialogRef = this.dialog.open(DeleteSessionComponent, {
+      width: '35%',
+      data: session,
+    });
+    dialogRef.afterClosed().subscribe(() => {
       this.getData();
     });
   }
@@ -131,7 +136,6 @@ export class DashboardComponent implements OnInit {
     this.sessionService
       .archiveSession(sesionId)
       .subscribe((x: IResponseDto) => {
-        console.log(x);
         this.snackBar.open(x.message, 'Close', {
           duration: 4000,
         });
@@ -146,6 +150,9 @@ export class DashboardComponent implements OnInit {
       height: '60%',
       data: session,
     });
+    dialogref.afterClosed().subscribe((result) => {
+      result;
+    });
   }
 
   createSessionDialog() {
@@ -153,8 +160,7 @@ export class DashboardComponent implements OnInit {
       width: '28%',
       height: 'auto',
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      result;
+    dialogRef.afterClosed().subscribe(() => {
       this.getData();
     });
   }

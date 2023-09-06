@@ -30,6 +30,8 @@ import { NewSessionComponent } from './features/new-session/new-session.componen
 import { LoginComponent } from './features/login/login.component';
 import { DeleteSessionComponent } from './features/delete-session/delete-session.component';
 import { SessionInterceptor } from './services/api/session-interceptor';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { SessionInterceptor } from './services/api/session-interceptor';
     NewSessionComponent,
     LoginComponent,
     DeleteSessionComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,12 @@ import { SessionInterceptor } from './services/api/session-interceptor';
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground:true,
+      minTime:30,
+      maxTime:-1
+    })
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:SessionInterceptor,multi:true}],
   bootstrap: [AppComponent],
