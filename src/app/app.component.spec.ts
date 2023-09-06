@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { NgxUiLoaderModule } from 'ngx-ui-loader'; 
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -17,7 +17,7 @@ describe('AppComponent', () => {
         MatMenuModule,
         MatToolbarModule,
         MatIconModule,
-        NgxUiLoaderModule
+        NgxUiLoaderModule,
       ],
       declarations: [AppComponent, HeaderComponent],
     })

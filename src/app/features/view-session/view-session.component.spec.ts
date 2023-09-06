@@ -13,16 +13,16 @@ describe('ViewSessionComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ViewSessionComponent],
       imports: [MatToolbarModule, MatIconModule, MatDialogModule],
-      providers:[
+      providers: [
         {
-          provide:MatDialogRef,
+          provide: MatDialogRef,
           useValue: {},
         },
         {
           provide: MAT_DIALOG_DATA,
-          useValue: {} as ISession, 
+          useValue: {} as ISession,
         },
-      ]
+      ],
     });
     fixture = TestBed.createComponent(ViewSessionComponent);
     component = fixture.componentInstance;

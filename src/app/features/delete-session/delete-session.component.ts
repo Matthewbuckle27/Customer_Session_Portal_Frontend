@@ -7,15 +7,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-delete-session',
   templateUrl: './delete-session.component.html',
-  styleUrls: ['./delete-session.component.scss']
+  styleUrls: ['./delete-session.component.scss'],
 })
 export class DeleteSessionComponent {
   constructor(
     public _dialogRef: MatDialogRef<DeleteSessionComponent>,
     @Inject(MAT_DIALOG_DATA) public session: ISession,
     private sessionService: SessionService,
-    private snackBar:MatSnackBar
-  ) { }
+    private snackBar: MatSnackBar
+  ) {}
 
   onCancelClick(): void {
     this._dialogRef.close();
@@ -23,7 +23,7 @@ export class DeleteSessionComponent {
 
   deleteSession() {
     this.sessionService.deleteSession(this.session.sessionId).subscribe(
-      (x:IResponseDto) => {
+      (x: IResponseDto) => {
         this.snackBar.open(x.message, 'Close', {
           duration: 4000,
         });
@@ -32,6 +32,6 @@ export class DeleteSessionComponent {
       () => {
         this._dialogRef.close();
       }
-    )
+    );
   }
 }
