@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
-import { IApiResponses, ISession } from '../models/session.model';
+import { IApiResponses, IResponseDto, ISession } from '../models/session.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewSessionComponent } from '../view-session/view-session.component';
 import { NewSessionComponent } from '../new-session/new-session.component';
 import { EditSessionComponent } from '../edit-session/edit-session.component';
 import { SessionService } from '../../services/session-service/session.service';
 import { DeleteSessionComponent } from '../delete-session/delete-session.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,10 +51,12 @@ export class DashboardComponent implements OnInit {
   pageSize = this.pageSizeOptions[0];
   currentPage = 0;
   errorMessage = false;
+  noSessions = false;
 
   constructor(
     private sessionService: SessionService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   onTabChange(event: MatTabChangeEvent) {
@@ -81,6 +84,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getData() {
+    this.dataSource.data = [];
+    this.errorMessage = false;
     this.dataSource.paginator = null;
     const sessionStatus = this.activeSessionsTab === true ? 'A' : 'X';
     const offset = this.currentPage;
@@ -88,11 +93,16 @@ export class DashboardComponent implements OnInit {
       .getSessions(sessionStatus, offset, this.pageSize)
       .subscribe(
         (response: IApiResponses) => {
-          this.dataSource.data = response.content;
+          this.noSessions = false;
+          this.dataSource.data = response.session;
           this.totalItems = response.totalElements;
         },
-        (error: Error) => {
-          this.errorMessage = true;
+        (error) => {
+          if (error.status === 400) {
+            this.noSessions = true;
+          } else {
+            this.errorMessage = true;
+          }
         }
       );
   }
@@ -109,18 +119,26 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  deleteSession(session:ISession):void{
-    const dialogRef=this.dialog.open(DeleteSessionComponent,{
-      width:'35%',
-      data:session
-    })
-    dialogRef.afterClosed().subscribe((result) => {
+  deleteSession(session: ISession): void {
+    const dialogRef = this.dialog.open(DeleteSessionComponent, {
+      width: '35%',
+      data: session,
+    });
+    dialogRef.afterClosed().subscribe(() => {
       this.getData();
     });
   }
 
   archiveSession(session: ISession) {
-    const sessionId = session.sessionId;
+    const sesionId = session.sessionId;
+    this.sessionService
+      .archiveSession(sesionId)
+      .subscribe((x: IResponseDto) => {
+        this.snackBar.open(x.message, 'Close', {
+          duration: 4000,
+        });
+        this.getData();
+      });
   }
 
   viewSession(session: ISession): void {
@@ -129,6 +147,9 @@ export class DashboardComponent implements OnInit {
       height: '60%',
       data: session,
     });
+    dialogref.afterClosed().subscribe((result) => {
+      result;
+    });
   }
 
   createSessionDialog() {
@@ -136,8 +157,8 @@ export class DashboardComponent implements OnInit {
       width: '28%',
       height: 'auto',
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      result;
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
     });
   }
 

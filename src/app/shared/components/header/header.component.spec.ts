@@ -23,9 +23,18 @@ describe('HeaderComponent', () => {
         MatIconModule,
       ],
     });
+    const dummyUsernameElement = document.createElement('div');
+    dummyUsernameElement.id = 'username';
+    document.body.appendChild(dummyUsernameElement);
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+  afterEach(() => {
+    const dummyUsernameElement = document.getElementById('username');
+    if (dummyUsernameElement) {
+      dummyUsernameElement.remove();
+    }
   });
   it('should create', () => {
     expect(component).toBeTruthy();
