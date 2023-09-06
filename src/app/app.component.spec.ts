@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { NgxUiLoaderModule } from 'ngx-ui-loader'; 
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -16,6 +17,7 @@ describe('AppComponent', () => {
         MatMenuModule,
         MatToolbarModule,
         MatIconModule,
+        NgxUiLoaderModule
       ],
       declarations: [AppComponent, HeaderComponent],
     })
@@ -40,7 +42,6 @@ describe('AppComponent', () => {
     const titleElement = compiled.querySelector('.center-title');
     const actualTitleText = titleElement?.textContent?.trim();
     const expectedTitleText = 'Customer Session Portal';
-    console.log('Actual Title Text:', actualTitleText);
     expect(actualTitleText).toContain(expectedTitleText);
   });
 });

@@ -14,17 +14,11 @@ export class SessionService {
   private sessions = 'http://localhost:8080/sessions';
   constructor(private http: HttpClient) {}
 
-  getSessions(
-    status: string,
-    offset: number,
-    pageSize: number
-  ): Observable<IApiResponses> {
+  getSessions(status: string, offset: number, pageSize: number): Observable<IApiResponses> {
     const params = new HttpParams()
-      .set('pageNo', offset.toString())
-      .set('pageSize', pageSize.toString());
-    return this.http.get<IApiResponses>(`${this.sessions}/${status}`, {
-      params,
-    });
+    .set('pageNo', offset.toString())
+    .set('pageSize', pageSize.toString());
+    return this.http.get<IApiResponses>(`${this.sessions}/${status}`,{params,});
   }
 
   createSession(sessionData: ICreateSessionDto): Observable<IResponseDto> {
@@ -32,17 +26,17 @@ export class SessionService {
     return this.http.post<IResponseDto>(url, sessionData);
   }
 
-  deleteSession(sessionId: number): Observable<IResponseDto> {
+  deleteSession(sessionId: string): Observable<IResponseDto> {
     const url = `${this.sessions}/${sessionId}`;
     return this.http.delete<IResponseDto>(url);
   }
 
-  archiveSession(sessionId: number): Observable<IResponseDto> {
+  archiveSession(sessionId: string): Observable<IResponseDto> {
     const url = `${this.sessions}/archive/${sessionId}`;
     return this.http.put<IResponseDto>(url, null);
   }
   updateSession(
-    sessionID: number,
+    sessionID: string,
     updateSessionDto: IUpdateSessionDto
   ): Observable<IResponseDto> {
     const url = `${this.sessions}/${sessionID}`;

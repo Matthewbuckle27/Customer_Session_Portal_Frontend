@@ -134,7 +134,6 @@ export class DashboardComponent implements OnInit {
     this.sessionService
       .archiveSession(sesionId)
       .subscribe((x: IResponseDto) => {
-        console.log(x);
         this.snackBar.open(x.message, 'Close', {
           duration: 4000,
         });

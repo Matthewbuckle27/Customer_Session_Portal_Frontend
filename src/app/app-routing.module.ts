@@ -8,7 +8,7 @@ import { EditSessionComponent } from './features/edit-session/edit-session.compo
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 const routes: Routes = [
   {path:'login', component:LoginComponent},
-  {path: 'home',component: DashboardComponent, canActivate:[]} ,
+  {path: 'home',component: DashboardComponent, canActivate:[AccessControlGuard]} ,
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path:'newsession', component:NewSessionComponent},
   {path:'editsession', component:EditSessionComponent},

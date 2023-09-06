@@ -4,14 +4,12 @@
   align-items: center;
   justify-content: center;
   height: 17vh;
-
   h2 {
     font-size: var(--dashboard-title-font);
     margin-bottom: 5px;
     color: var(--dashboard-title-color);
     font-weight: bold;
   }
-
   button {
     background-color: var(--button-color);
     border-radius: 30px;
@@ -26,11 +24,9 @@
   border-radius: 10px;
   box-shadow: 0px 0px 9px var(--box-shadow-color);
   min-height: 60%;
-
   .table-container {
     max-height: 42vh;
   }
-
   th {
     position: sticky;
     top: 0;
@@ -38,16 +34,13 @@
     font-size: var(--table-header);
     text-align: center;
   }
-
   td {
     text-align: center;
     font-size: var(--table-data);
   }
-
   tr {
     height: 7vh;
   }
-
   #options {
     font-size: large;
     padding-top: 3px;
@@ -77,17 +70,21 @@
   margin-top: 10vh;
   align-self: center;
 }
-#nodata-container{
+
+#nodata-container {
   margin-top: 10vh;
   align-self: center;
 }
-#error-text{
+
+#error-text {
   margin-left: 27vw;
 }
-#error-image{
- margin-left: 2.3vw;
+
+#error-image {
+  margin-left: 2.3vw;
 }
-#no-data-found{
+
+#no-data-found {
   margin-left: 40vw;
 }
 
@@ -191,4 +188,3 @@ img {
   --mat-tab-header-active-focus-indicator-color: var(--custom-tab-active-color);
   --mat-tab-header-active-hover-indicator-color: var(--custom-tab-active-color);
 }
-

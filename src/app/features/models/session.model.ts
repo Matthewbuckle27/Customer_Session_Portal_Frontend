@@ -18,7 +18,7 @@ export interface ICreateSessionDto {
 
 export interface ISession {
   sessionName: string;
-  sessionId: number;
+  sessionId: string;
   remarks: string;
   createdBy: string;
   createdOn: Date;
