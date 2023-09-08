@@ -12,7 +12,6 @@ export interface IResponseDto {
 export interface ICreateSessionDto {
   customerId: string;
   sessionName: string;
-
   remarks: string;
 }
 export interface IResponseDto {

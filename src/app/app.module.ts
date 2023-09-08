@@ -32,6 +32,7 @@ import { DeleteSessionComponent } from './features/delete-session/delete-session
 import { SessionInterceptor } from './services/api/session-interceptor';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 @NgModule({
   declarations: [

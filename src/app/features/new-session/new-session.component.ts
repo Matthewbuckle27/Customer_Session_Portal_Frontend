@@ -16,7 +16,7 @@ export class NewSessionComponent {
   errorMessage = '';
 
   constructor(
-    private popup: MatDialogRef<NewSessionComponent>,
+    protected popup: MatDialogRef<NewSessionComponent>,
     private fb: FormBuilder,
     private sessionservice: SessionService,
     private toastrService: ToastrService
