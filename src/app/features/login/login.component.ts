@@ -32,8 +32,7 @@ export class LoginComponent {
           this.errorMessage = 'Invalid Credentials!';
         }
       } else {
-        this.errorMessage =
-          'Username and password must be at most 10 characters long.';
+        this.errorMessage = 'Username and password must be at most 10 characters long.';
       }
     }
   }

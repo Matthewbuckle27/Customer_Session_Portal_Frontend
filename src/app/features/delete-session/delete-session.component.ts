@@ -28,9 +28,6 @@ export class DeleteSessionComponent {
           duration: 4000,
         });
         this._dialogRef.close();
-      },
-      () => {
-        this._dialogRef.close();
       }
     );
   }
