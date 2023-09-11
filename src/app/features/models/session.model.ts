@@ -13,9 +13,19 @@ export interface ICreateSessionDto {
   customerId: string;
   sessionName: string;
   remarks: string;
-  createdBy: string;
+}
+export interface IResponseDto {
+  message: string;
+  httpStatus: string;
+  sessionResponseDTO: ISession;
 }
 
+export interface ICreateSessionDto{
+  customerId:string;
+  sessionName:string;
+  remarks:string;
+  createdBy:string;
+}
 export interface ISession {
   sessionName: string;
   sessionId: string;

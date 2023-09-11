@@ -79,6 +79,8 @@ export class EditSessionComponent implements OnInit {
     }
   }
 
+  
+
   onClose(): void {
     this._dialogRef.close();
   }

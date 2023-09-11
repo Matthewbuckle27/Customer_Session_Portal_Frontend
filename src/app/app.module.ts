@@ -29,9 +29,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { NewSessionComponent } from './features/new-session/new-session.component';
 import { LoginComponent } from './features/login/login.component';
 import { DeleteSessionComponent } from './features/delete-session/delete-session.component';
-import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { SessionInterceptor } from './services/api/session-interceptor';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 @NgModule({
   declarations: [

@@ -30,11 +30,6 @@ export class SessionService {
     const url = `${this.sessions}/${sessionId}`;
     return this.http.delete<IResponseDto>(url);
   }
-
-  archiveSession(sessionId: string): Observable<IResponseDto> {
-    const url = `${this.sessions}/archive/${sessionId}`;
-    return this.http.put<IResponseDto>(url, null);
-  }
   updateSession(
     sessionID: string,
     updateSessionDto: IUpdateSessionDto
@@ -42,4 +37,9 @@ export class SessionService {
     const url = `${this.sessions}/${sessionID}`;
     return this.http.put<IResponseDto>(url, updateSessionDto);
   }
+  archiveSession(sessionId: string): Observable<IResponseDto> {
+    const url = `${this.sessions}/archive/${sessionId}`;
+    return this.http.put<IResponseDto>(url, null);
+  }
+
 }

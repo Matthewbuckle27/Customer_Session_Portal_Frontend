@@ -10,6 +10,7 @@ import { EditSessionComponent } from '../edit-session/edit-session.component';
 import { SessionService } from '../../services/session-service/session.service';
 import { DeleteSessionComponent } from '../delete-session/delete-session.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -56,8 +57,9 @@ export class DashboardComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private dialog: MatDialog,
+    private _toastrService: ToastrService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   onTabChange(event: MatTabChangeEvent) {
     if (event.index === 1) {
@@ -140,6 +142,7 @@ export class DashboardComponent implements OnInit {
         this.getData();
       });
   }
+
 
   viewSession(session: ISession): void {
     const dialogref = this.dialog.open(ViewSessionComponent, {
