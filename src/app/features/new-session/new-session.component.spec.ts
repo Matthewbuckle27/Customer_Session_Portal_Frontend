@@ -1,29 +1,47 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { NewSessionComponent } from './new-session.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { SessionService } from '../../services/session-service/session.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ToastrService, ToastrModule } from 'ngx-toastr';
-import { of, throwError } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
+import {
+  ToastrService,
+  ToastrModule,
+  ToastNoAnimationModule,
+} from 'ngx-toastr';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IResponseDto } from '../models/session.model';
+import { SessionService } from '../../services/session-service/session.service';
+import { of, throwError } from 'rxjs';
 
 describe('NewSessionComponent', () => {
   let component: NewSessionComponent;
   let fixture: ComponentFixture<NewSessionComponent>;
   let sessionService: SessionService;
-  let toastrService: ToastrService;
+  let dialogRef: MatDialogRef<NewSessionComponent>; // Mocked dialog reference
 
   beforeEach(() => {
-    const matDialogRefStub = {};
-
+    const matDialogRefStub = {
+      close: jest.fn(),
+    };
     TestBed.configureTestingModule({
       declarations: [NewSessionComponent],
       imports: [
         MatDialogModule,
+        BrowserAnimationsModule,
+        MatIconModule,
         ReactiveFormsModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        HttpClientModule,
         HttpClientTestingModule,
         ToastrModule.forRoot(),
+        ToastNoAnimationModule.forRoot(),
       ],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefStub },
@@ -34,9 +52,7 @@ describe('NewSessionComponent', () => {
     fixture = TestBed.createComponent(NewSessionComponent);
     component = fixture.componentInstance;
     sessionService = TestBed.inject(SessionService);
-    toastrService = TestBed.inject(ToastrService);
-
-    fixture.detectChanges();
+    dialogRef = TestBed.inject(MatDialogRef); // Inject dialogRef here
   });
 
   it('should create', () => {
@@ -44,50 +60,50 @@ describe('NewSessionComponent', () => {
   });
 
   it('should set RMname in localStorage and create a session', () => {
-    const setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
     const sessionData = {
       customerId: '123',
       sessionName: 'Test Session',
       remarks: 'Test remarks',
-      createdBy: 'Ram',
+      createdBy: '',
     };
     const createSessionSpy = jest
       .spyOn(sessionService, 'createSession')
       .mockReturnValueOnce(
         of({ message: 'Session created successfully' } as IResponseDto)
       );
-
     component.createSessionForm.patchValue(sessionData);
     component.createSession();
-    expect(setItemSpy).toHaveBeenCalledWith('RMname', 'Ram');
     expect(createSessionSpy).toHaveBeenCalledWith(sessionData);
   });
-  
+
   it('should handle session creation success', () => {
-    const setItemSpy = spyOn(localStorage, 'setItem');
-    const toastrService = TestBed.inject(ToastrService); 
-    const toastrSuccessSpy = spyOn(toastrService, 'success');
+    const toastrService = TestBed.inject(ToastrService);
+    const toastrSuccessSpy = jest.spyOn(toastrService, 'success');
     const sessionData = {
       customerId: '123',
       sessionName: 'Test Session',
       remarks: 'Test remarks',
-      createdBy: 'Ram'
+      createdBy: '',
     };
-    const createSessionSpy = spyOn(sessionService, 'createSession').and.returnValue(
-      of({ message: 'Session created successfully' } as IResponseDto)
-    );
+    const createSessionSpy = jest
+      .spyOn(sessionService, 'createSession')
+      .mockReturnValue(
+        of({ message: 'Session created successfully' } as IResponseDto)
+      );
     component.createSessionForm.patchValue(sessionData);
     component.createSession();
-
-    expect(setItemSpy).toHaveBeenCalledWith('RMname', 'Ram');
     expect(createSessionSpy).toHaveBeenCalledWith(sessionData);
-    expect(toastrSuccessSpy).toHaveBeenCalledWith('Session created successfully', 'Success');
+    expect(toastrSuccessSpy).toHaveBeenCalledWith(
+      'Session created successfully',
+      'Success'
+    );
   });
-  
+
   it('should handle session creation failure', () => {
     const createSessionSpy = jest
       .spyOn(sessionService, 'createSession')
       .mockReturnValue(throwError('Error occurred'));
+    const toastrService = TestBed.inject(ToastrService);
     const toastrErrorSpy = jest.spyOn(toastrService, 'error');
     component.createSession();
     expect(createSessionSpy).toHaveBeenCalled();
@@ -98,9 +114,29 @@ describe('NewSessionComponent', () => {
     expect(component.isLoading).toBe(false);
   });
 
-  it('should close the popup on onClose', () => {
-    const closeSpy = jest.spyOn(component as any, 'closeModal');
+  it('should close the dialog when onClose is called', () => {
     component.onClose();
-    expect(closeSpy).toHaveBeenCalled();
+    expect(dialogRef.close).toHaveBeenCalled();
+  });
+
+  it('should have getters for customerId, sessionName, and remarks', () => {
+    expect(component.customerId).toBeDefined();
+    expect(component.sessionName).toBeDefined();
+    expect(component.remarks).toBeDefined();
+  });
+
+  it('should get customerId', () => {
+    const customerIdControl = component.customerId;
+    expect(customerIdControl).toBeTruthy();
+  });
+
+  it('should get sessionName', () => {
+    const sessionNameControl = component.sessionName;
+    expect(sessionNameControl).toBeTruthy();
+  });
+
+  it('should get remarks', () => {
+    const remarksControl = component.remarks;
+    expect(remarksControl).toBeTruthy();
   });
 });

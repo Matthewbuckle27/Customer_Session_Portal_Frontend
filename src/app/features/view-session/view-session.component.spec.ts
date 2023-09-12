@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 
-// Mock MatDialogRef
 const dialogRefMock = {
   close: jest.fn(),
 };
@@ -22,7 +21,7 @@ describe('ViewSessionComponent', () => {
     remarks: 'This is a test session',
     createdOn: new Date(),
     updatedOn: new Date(),
-    status: 'Active',
+    status: 'A',
     customerId: 'CB1',
     archiveFlag: 'false',
   };
@@ -38,11 +37,10 @@ describe('ViewSessionComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: dialogRefMock, // Provide the mock MatDialogRef
+          useValue: dialogRefMock,
         },
       ],
     });
-
     TestBed.compileComponents().then(() => {
       fixture = TestBed.createComponent(ViewSessionComponent);
       component = fixture.componentInstance;
@@ -55,9 +53,7 @@ describe('ViewSessionComponent', () => {
   });
 
   it('should display session information correctly', () => {
-    // Wait for asynchronous data loading
     fixture.whenStable().then(() => {
-      // Check if session data is displayed correctly in the component
       const sessionData = mockSessionData;
       const compiled = fixture.nativeElement;
       expect(

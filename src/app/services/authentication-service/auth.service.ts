@@ -26,10 +26,11 @@ export class AuthService {
   }
 
   login(username: string, password: string): boolean {
-    if (username === 'LM1' && password === '123') {
+    if (username === 'prashanth' && password === 'prashanth') {
       this._isLoggedIn = true;
       this._userName = username;
-      localStorage.setItem(this.storageKey, username); 
+      const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase();
+      localStorage.setItem('RMname', capitalizedUsername);
       return true;
     } else {
       return false;
@@ -39,6 +40,6 @@ export class AuthService {
   logout(): void {
     this._isLoggedIn = false;
     this._userName = '';
-    localStorage.removeItem(this.storageKey); // Clear login status from localStorage
+    localStorage.removeItem(this.storageKey);
   }
 }

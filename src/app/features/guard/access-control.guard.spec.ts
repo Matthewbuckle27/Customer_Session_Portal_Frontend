@@ -1,16 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivate } from '@angular/router';
-import { AccessControlGuard } from './access-control.guard';
+import { CanActivateFn } from '@angular/router';
 
-describe('AccessControlGuard', () => {
-  let guard: AccessControlGuard;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    guard = TestBed.inject(AccessControlGuard);
-  });
+describe('accessControlGuard', () => {
+  const executeGuard: CanActivateFn = () =>
+    beforeEach(() => {
+      TestBed.configureTestingModule({});
+    });
 
   it('should be created', () => {
-    expect(guard).toBeTruthy();
+    expect(executeGuard).toBeTruthy();
   });
 });

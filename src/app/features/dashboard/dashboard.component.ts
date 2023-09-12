@@ -10,7 +10,7 @@ import { EditSessionComponent } from '../edit-session/edit-session.component';
 import { SessionService } from '../../services/session-service/session.service';
 import { DeleteSessionComponent } from '../delete-session/delete-session.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ToastrService } from 'ngx-toastr';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -57,7 +57,6 @@ export class DashboardComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private dialog: MatDialog,
-    private _toastrService: ToastrService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -93,6 +92,14 @@ export class DashboardComponent implements OnInit {
     const offset = this.currentPage;
     this.sessionService
       .getSessions(sessionStatus, offset, this.pageSize)
+      .pipe(
+        catchError((err) => {
+          if (err.status === 400) {
+            console.log(err);
+          }
+          return throwError(err);
+        })
+      )
       .subscribe(
         (response: IApiResponses) => {
           this.noSessions = false;
@@ -126,8 +133,10 @@ export class DashboardComponent implements OnInit {
       width: '35%',
       data: session,
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
+    dialogRef.afterClosed().subscribe((isDeleteSuccessful: boolean) => {
+      if (isDeleteSuccessful) {
+        this.getData();
+      }
     });
   }
 
@@ -145,13 +154,10 @@ export class DashboardComponent implements OnInit {
 
 
   viewSession(session: ISession): void {
-    const dialogref = this.dialog.open(ViewSessionComponent, {
+    this.dialog.open(ViewSessionComponent, {
       width: '32%',
       height: '60%',
       data: session,
-    });
-    dialogref.afterClosed().subscribe((result) => {
-      result;
     });
   }
 
@@ -160,8 +166,10 @@ export class DashboardComponent implements OnInit {
       width: '28%',
       height: 'auto',
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
+    dialogRef.afterClosed().subscribe((isCreatedSession: boolean) => {
+      if (isCreatedSession) {
+        this.getData();
+      }
     });
   }
 
