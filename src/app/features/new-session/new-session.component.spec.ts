@@ -48,6 +48,7 @@ describe('NewSessionComponent', () => {
         ToastrService,
       ],
     });
+
     fixture = TestBed.createComponent(NewSessionComponent);
     component = fixture.componentInstance;
     sessionService = TestBed.inject(SessionService);

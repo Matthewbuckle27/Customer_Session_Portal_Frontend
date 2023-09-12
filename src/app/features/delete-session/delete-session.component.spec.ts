@@ -15,7 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 describe('DeleteSessionComponent', () => {
   let component: DeleteSessionComponent;
   let fixture: ComponentFixture<DeleteSessionComponent>;
-
+  let sessionService: SessionService;
+  let snackBar: MatSnackBar;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [DeleteSessionComponent],
@@ -55,6 +56,8 @@ describe('DeleteSessionComponent', () => {
     });
     fixture = TestBed.createComponent(DeleteSessionComponent);
     component = fixture.componentInstance;
+    // Get an instance of MatSnackBar from TestBed
+    snackBar = TestBed.inject(MatSnackBar);
     fixture.detectChanges();
   });
 

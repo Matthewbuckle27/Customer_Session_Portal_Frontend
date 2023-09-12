@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SessionService } from '../../services/session-service/session.service';
 import { ICreateSessionDto, IResponseDto } from '../models/session.model';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,7 +16,7 @@ export class NewSessionComponent {
   errorMessage = '';
 
   constructor(
-    private popup: MatDialogRef<NewSessionComponent>,
+    protected popup: MatDialogRef<NewSessionComponent>,
     private fb: FormBuilder,
     private sessionservice: SessionService,
     private toastrService: ToastrService

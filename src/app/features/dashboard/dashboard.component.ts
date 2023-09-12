@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
     private sessionService: SessionService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   onTabChange(event: MatTabChangeEvent) {
     if (event.index === 1) {
@@ -151,6 +151,7 @@ export class DashboardComponent implements OnInit {
         this.getData();
       });
   }
+
 
   viewSession(session: ISession): void {
     this.dialog.open(ViewSessionComponent, {
