@@ -22,16 +22,13 @@ export class DeleteSessionComponent {
   }
 
   deleteSession() {
-    this.sessionService.deleteSession(this.session.sessionId).subscribe(
-      (x: IResponseDto) => {
+    this.sessionService
+      .deleteSession(this.session.sessionId)
+      .subscribe((x: IResponseDto) => {
         this.snackBar.open(x.message, 'Close', {
           duration: 4000,
         });
-        this._dialogRef.close();
-      },
-      () => {
-        this._dialogRef.close();
-      }
-    );
+        this._dialogRef.close(true);
+      });
   }
 }

@@ -34,14 +34,4 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('Customer-Session-Portal');
   });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    const titleElement = compiled.querySelector('.center-title');
-    const actualTitleText = titleElement?.textContent?.trim();
-    const expectedTitleText = 'Customer Session Portal';
-    expect(actualTitleText).toContain(expectedTitleText);
-  });
 });

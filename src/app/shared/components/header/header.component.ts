@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/authentication-service/auth.service';
 @Component({
@@ -11,12 +11,17 @@ export class HeaderComponent implements AfterViewInit {
   constructor(
     public service: AuthService,
     private route: Router,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private cdr: ChangeDetectorRef 
   ) {}
   ngAfterViewInit(): void {
     const usernameElement = this.elRef.nativeElement.querySelector('#username');
-    this.usernameWidth = usernameElement.clientWidth;
+    if (usernameElement) {
+      this.usernameWidth = usernameElement.clientWidth;
+      this.cdr.detectChanges();
+    }
   }
+
   capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -27,3 +32,6 @@ export class HeaderComponent implements AfterViewInit {
     this.route.navigateByUrl('/login');
   }
 }
+
+
+

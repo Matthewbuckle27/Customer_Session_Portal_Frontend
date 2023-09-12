@@ -35,12 +35,12 @@ export class EditSessionComponent implements OnInit {
       sessionName: new FormControl(this.session.sessionName, [
         Validators.required,
         Validators.minLength(4),
-        Validators.pattern("^[a-zA-Z0-9 ]+$")
+        Validators.pattern('^[a-zA-Z0-9 ]+$'),
       ]),
       remarks: new FormControl(this.session.remarks, [
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(255)
+        Validators.maxLength(255),
       ]),
     });
   }
@@ -61,11 +61,8 @@ export class EditSessionComponent implements OnInit {
       this._sessionService
         .updateSession(this.session.sessionId, updateDto)
         .subscribe(
-          (x:IResponseDto) => {
-            this._toastrService.success(
-              `${x.message}`,
-              'Success'
-            );
+          (x: IResponseDto) => {
+            this._toastrService.success(`${x.message}`, 'Success');
             this._dialogRef.close(updateDto);
           },
           (error) => {
@@ -76,9 +73,10 @@ export class EditSessionComponent implements OnInit {
             }
           }
         );
+    } else {
+      this._toastrService.error('An error while updating the session', 'Error');
     }
   }
-
   onClose(): void {
     this._dialogRef.close();
   }

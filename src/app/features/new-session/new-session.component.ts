@@ -47,7 +47,6 @@ export class NewSessionComponent {
   }
 
   createSession() {
-    localStorage.setItem('RMname', 'Ram');
     const sessionData: ICreateSessionDto = {
       customerId: this.createSessionForm.value.customerId || '',
       sessionName: this.createSessionForm.value.sessionName || '',
@@ -62,11 +61,12 @@ export class NewSessionComponent {
       () => {
         this.errorMessage = 'Failed to create the session!';
         this.isLoading = false;
+        this.toastrService.error(this.errorMessage, 'Error');
       }
     );
   }
   closeModal() {
-    this.popup.close();
+    this.popup.close(true);
   }
   onClose() {
     this.popup.close();

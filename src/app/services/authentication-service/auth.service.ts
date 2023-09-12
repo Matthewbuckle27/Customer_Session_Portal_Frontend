@@ -15,9 +15,11 @@ export class AuthService {
   }
 
   login(username: string, password: string): boolean {
-    if (username === 'admin' && password === 'admin123') {
+    if (username === 'prashanth' && password === 'prashanth') {
       this._isLoggedIn = true;
       this._userName = username;
+      const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase();
+      localStorage.setItem('RMname', capitalizedUsername);
       return true;
     } else {
       return false;

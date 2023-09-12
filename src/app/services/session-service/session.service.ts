@@ -14,11 +14,17 @@ export class SessionService {
   private sessions = 'http://localhost:8080/sessions';
   constructor(private http: HttpClient) {}
 
-  getSessions(status: string, offset: number, pageSize: number): Observable<IApiResponses> {
+  getSessions(
+    status: string,
+    offset: number,
+    pageSize: number
+  ): Observable<IApiResponses> {
     const params = new HttpParams()
-    .set('pageNo', offset.toString())
-    .set('pageSize', pageSize.toString());
-    return this.http.get<IApiResponses>(`${this.sessions}/${status}`,{params,});
+      .set('pageNo', offset.toString())
+      .set('pageSize', pageSize.toString());
+    return this.http.get<IApiResponses>(`${this.sessions}/${status}`, {
+      params,
+    });
   }
 
   createSession(sessionData: ICreateSessionDto): Observable<IResponseDto> {

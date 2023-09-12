@@ -74,12 +74,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     }),
     NgxUiLoaderModule,
     NgxUiLoaderHttpModule.forRoot({
-      showForeground:true,
-      minTime:30,
-      maxTime:-1
-    })
+      showForeground: true,
+      minTime: 30,
+      maxTime: -1,
+    }),
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:SessionInterceptor,multi:true}],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: SessionInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

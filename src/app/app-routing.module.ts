@@ -7,15 +7,19 @@ import { NewSessionComponent } from './features/new-session/new-session.componen
 import { EditSessionComponent } from './features/edit-session/edit-session.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 const routes: Routes = [
-  {path:'login', component:LoginComponent},
-  {path: 'home',component: DashboardComponent, canActivate:[AccessControlGuard]} ,
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path:'newsession', component:NewSessionComponent},
-  {path:'editsession', component:EditSessionComponent},
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'home',
+    component: DashboardComponent,
+    canActivate: [AccessControlGuard],
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'newsession', component: NewSessionComponent },
+  { path: 'editsession', component: EditSessionComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
