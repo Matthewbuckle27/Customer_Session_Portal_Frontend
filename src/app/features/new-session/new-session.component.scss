@@ -16,6 +16,13 @@ mat-dialog-content {
   box-sizing: border-box;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px;
+}
+
 .title {
   font-size: var(--create--title-font);
   padding-top: 20px;
@@ -24,15 +31,45 @@ mat-dialog-content {
   color: var(--mat-primay-color);
 }
 
+.form-row-single {
+  color: var(--dialog-body-key-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: -4px;
+  font-weight: bold;
+
+  mat-label {
+    width: 43%;
+    padding-top: 0.5rem;
+    font-weight: bold;
+  }
+
+  mat-form-field {
+    width: 55%;
+  }
+
+  input {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+}
+
 .form-row {
   color: var(--dialog-body-key-color);
   display: flex;
   flex-direction: column;
+  font-weight: bold;
   margin-bottom: -4px;
 }
 
-.remarks {
-  min-height: 5px;
+::ng-deep.small-input .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+::ng-deep.small-input .mat-mdc-text-field-wrapper {
+  height: 40px;
 }
 
 mat-dialog-actions {
@@ -40,7 +77,7 @@ mat-dialog-actions {
   justify-content: center;
   align-items: center;
   margin-top: -30px;
-
+  flex-wrap: wrap;
 }
 
 .mat-form-field-outline {
@@ -52,7 +89,7 @@ button {
   border-radius: 10px;
   font-size: small;
   border-radius: 30px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .submit {
@@ -62,11 +99,12 @@ button {
 
 .close-button {
   position: absolute;
-  top: -15px;
+  top: -7px;
   right: 0px;
   min-width: 10px;
   min-height: 10px;
   color: var(--mat-header-color);
+  background-color: transparent;
 }
 
 .header {
@@ -79,4 +117,21 @@ button {
   border-radius: 30px;
   color: var(--button-text);
   font-size: small;
+}
+
+mat-dialog-actions > * {
+  flex-basis: 100%;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message {
+  color: var(--validation-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

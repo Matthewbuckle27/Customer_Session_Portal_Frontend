@@ -1,3 +1,5 @@
+@import url('/src/assets/styles/variables.scss');
+
 .header {
   display: flex;
   align-items: center;
@@ -41,10 +43,11 @@
 
   #username {
     color: var(--text-color);
-    font-weight: bolder;
     white-space: nowrap;
+    font-size: medium;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 6px;
   }
 
   .mat-icon {

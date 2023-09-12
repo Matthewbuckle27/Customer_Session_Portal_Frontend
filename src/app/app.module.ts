@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './shared/components/header/header.component';
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,15 +17,22 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MomentFormatPipe } from './services/moment-format.pipe';
+import { MomentFormatPipe } from './shared/pipes/moment-format.pipe';
 import { MatDividerModule } from '@angular/material/divider';
-import { NewSessionComponent } from './features/new-session/new-session.component';
+import { ViewSessionComponent } from './features/view-session/view-session.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
-
+import { EditSessionComponent } from './features/edit-session/edit-session.component';
+import { ToastrModule } from 'ngx-toastr';
+import { NewSessionComponent } from './features/new-session/new-session.component';
+import { LoginComponent } from './features/login/login.component';
+import { DeleteSessionComponent } from './features/delete-session/delete-session.component';
+import { SessionInterceptor } from './services/api/session-interceptor';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 @NgModule({
   declarations: [
@@ -35,7 +40,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HeaderComponent,
     DashboardComponent,
     MomentFormatPipe,
+    ViewSessionComponent,
+    EditSessionComponent,
     NewSessionComponent,
+    LoginComponent,
+    DeleteSessionComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,10 +68,21 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSnackBarModule,
     MatTabsModule,
     MatDividerModule,
-    MatProgressSpinnerModule
-    
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground: true,
+      minTime: 30,
+      maxTime: -1,
+    }),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: SessionInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
