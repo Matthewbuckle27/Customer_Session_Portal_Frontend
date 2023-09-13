@@ -68,7 +68,7 @@ describe('SessionService', () => {
     const status = 'A';
     const offset = 0;
     const pageSize = 2;
-    const url = 'http://localhost:8080/sessions';
+    const url = 'http://localhost:172.16.238.164/sessions';
     service.getSessions(status, offset, pageSize).subscribe((response) => {
       expect(response).toEqual(expectedResponse);
     });
@@ -101,7 +101,7 @@ describe('SessionService', () => {
         archiveFlag: 'No',
       },
     };
-    const url = 'http://localhost:8080/sessions';
+    const url = 'http://localhost:172.16.238.164/sessions';
     service.createSession(sessionData).subscribe((response) => {
       expect(response).toEqual(mockResponse);
     });
@@ -128,7 +128,7 @@ describe('SessionService', () => {
       },
     };
     const sessionId = '12345';
-    const url = 'http://localhost:8080/sessions';
+    const url = 'http://localhost:172.16.238.164/sessions';
     const expectedUrl = `${url}/${sessionId}`;
     service.deleteSession(sessionId).subscribe((response) => {
       expect(response.sessionResponseDTO.sessionId).toEqual(sessionId);
@@ -140,7 +140,7 @@ describe('SessionService', () => {
 
   it('shoul call Archive Session APi', () => {
     const sessionId = '123456';
-    const url = 'http://localhost:8080/sessions';
+    const url = 'http://localhost:172.16.238.164/sessions';
     const expectedUrl = `${url}/${'archive'}/${sessionId}`;
     const expectedResponse: IResponseDto = {
       message: 'Session Deleted successfully',
@@ -188,7 +188,7 @@ describe('SessionService', () => {
         archiveFlag: 'No',
       },
     };
-    const url = 'http://localhost:8080/sessions';
+    const url = 'http://localhost:172.16.238.164/sessions';
     const expectedUrl = `${url}/${sessionId}`;
     service.updateSession(sessionId, mockUpdateRespone).subscribe((res) => {
       expect(res).toBe(mockResponse);

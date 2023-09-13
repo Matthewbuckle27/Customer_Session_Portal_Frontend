@@ -11,7 +11,7 @@ import { IUpdateSessionDto } from '../../features/models/session.model';
   providedIn: 'root',
 })
 export class SessionService {
-  private sessions = 'http://localhost:8080/sessions';
+  private sessions = 'http://172.16.238.164:8080/sessions';
   constructor(private http: HttpClient) {}
 
   getSessions(
