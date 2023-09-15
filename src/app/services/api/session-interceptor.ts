@@ -19,7 +19,6 @@ export class SessionInterceptor implements HttpInterceptor {
     req: HttpRequest<ISession>,
     next: HttpHandler
   ): Observable<HttpEvent<ISession>> {
-    console.log(req);
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(error);
