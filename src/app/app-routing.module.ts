@@ -11,9 +11,9 @@ const routes: Routes = [
   {
     path: 'home',
     component: DashboardComponent,
-    canActivate: [AccessControlGuard],
+    canActivate: [],
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'newsession', component: NewSessionComponent },
   { path: 'editsession', component: EditSessionComponent },
   { path: '**', component: PageNotFoundComponent },

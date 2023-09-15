@@ -95,7 +95,8 @@ export class DashboardComponent implements OnInit {
       .pipe(
         catchError((err) => {
           if (err.status === 400) {
-            console.log(err);
+              console.log();
+              
           }
           return throwError(err);
         })
